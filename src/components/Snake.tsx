@@ -2,24 +2,18 @@
 import '@/css/snake.css';
 import { useRef, useState, useEffect } from 'react';
 
-
-type KeyboardEvent = {
-    key: string;
-};
-
-
 export default function Snake() {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
+
     const tileSize: number = 15;
     const tileCountY = useRef<number>(0);
     const tileCountX = useRef<number>(0);
-    const snakeBody: { x: number, y: number }[] = [{ x: 10, y: 10 }];
-    const food: { x: number, y: number } = { x: 15, y: 15 };
+    const snakeBody = useRef<{ x: number, y: number }[]>([{ x: 10, y: 10 }]);
+    const food = useRef<{ x: number, y: number }>({ x: 15, y: 15 });
     const [score, setScore] = useState<number>(0);
     const [highScore, setHighScore] = useState<number>(0);
     const direction = useRef<string>('');
-    const snakeHead = { x: snakeBody[0].x, y: snakeBody[0].y };
     const margin = 200;
 
 
@@ -31,50 +25,54 @@ export default function Snake() {
         tileCountY.current = Math.floor(canvasRef.current.height / tileSize);
     };
 
-    const calcMovement = (e: KeyboardEvent) => {
-        if (e.key === 'ArrowLeft' && direction.current !== 'right')/*left*/ {
+    const calcMovement = (event: KeyboardEvent) => {
+        if (event.key === 'ArrowLeft' && direction.current !== 'right') {
             direction.current = 'left';
         }
-        if (e.key === 'ArrowUp' && direction.current !== 'down')/*up*/ {
+        if (event.key === 'ArrowUp' && direction.current !== 'down') {
             direction.current = 'up';
         }
-        if (e.key === 'ArrowRight' && direction.current !== 'left')/*right*/ {
+        if (event.key === 'ArrowRight' && direction.current !== 'left') {
             direction.current = 'right';
         }
-        if (e.key === 'ArrowDown' && direction.current !== 'up')/*down*/ {
+        if (event.key === 'ArrowDown' && direction.current !== 'up') {
             direction.current = 'down';
         }
     };
 
     const generateFood = () => {
-        food.x = Math.floor(Math.random() * tileCountX.current);
-        food.y = Math.floor(Math.random() * tileCountY.current);
+        food.current.x = Math.floor(Math.random() * tileCountX.current);
+        food.current.y = Math.floor(Math.random() * tileCountY.current);
 
     };
 
     const generateSnake = () => {
-        snakeHead.y = Math.floor(Math.random() * tileCountX.current);
-        snakeHead.x = Math.floor(Math.random() * tileCountY.current);
+        snakeBody.current[0].x = Math.floor(Math.random() * tileCountX.current);
+        snakeBody.current[0].y = Math.floor(Math.random() * tileCountY.current); 
     };
 
     const eatFood = () => {
-        if (snakeHead.x === food.x && snakeHead.y === food.y) {
-            snakeBody.push(food);
-            setScore((prevScore) => prevScore + 1);
+        let snakeHead = snakeBody.current[0];
+        if (snakeHead.x === food.current.x && snakeHead.y === food.current.y) {
             generateFood();
+            setScore((prevScore) => prevScore + 1);
+        } else {
+            snakeBody.current.pop();
         }
     };
 
     const move = () => {
-        if (direction.current = 'left') {
+        let snakeHead = snakeBody.current[0];
+        if (direction.current === 'left') {
             snakeHead.x--;
-        } if (direction.current = 'right') {
+        } if (direction.current === 'right') {
             snakeHead.x++;
-        } if (direction.current = 'up') {
+        } if (direction.current === 'up') {
             snakeHead.y--;
-        } if (direction.current = 'down') {
+        } if (direction.current === 'down') {
             snakeHead.y++;
         }
+        snakeBody.current.unshift({ x: snakeHead.x, y: snakeHead.y });
         eatFood();
 
         if (snakeHead.x < 0 || snakeHead.x > tileCountX.current || snakeHead.y < 0 || snakeHead.y > tileCountY.current || headHitsBody()) {
@@ -85,11 +83,14 @@ export default function Snake() {
             setScore((prevScore) => prevScore = 0);
             generateFood();
             generateSnake();
+            direction.current = '';
+            snakeBody.current[0] = {x: Math.floor(Math.random() * tileCountX.current),  y: Math.floor(Math.random() * tileCountX.current)};
         }
     };
     const headHitsBody = () => {
-        if (snakeBody.length > 3) {
-            return snakeBody.some(bodyPart => snakeHead.x === bodyPart.x && snakeHead.y === bodyPart.y);
+        let snakeHead = snakeBody.current[0];
+        if (snakeBody.current.length > 3) {
+            return snakeBody.current.some(bodyPart => snakeHead.x === bodyPart.x && snakeHead.y === bodyPart.y);
         }
     };
 
@@ -106,37 +107,40 @@ export default function Snake() {
         setCanvasSize();
 
         const drawCanvas = () => {
+            context.clearRect(0, 0, tileCountX.current * tileSize, tileCountY.current * tileSize);
+
             context.fillStyle = 'black';
-            context.fillRect(0, 0, tileSize, tileSize);
+            context.fillRect(0, 0, tileCountX.current * tileSize, tileCountY.current * tileSize);
         };
 
         const drawFood = () => {
             context.fillStyle = 'red';
-            context.fillRect(food.x * tileSize, food.y * tileSize, tileSize, tileSize);
+            context.fillRect(food.current.x * tileSize, food.current.y * tileSize, tileSize, tileSize);
         };
 
         const drawSnake = () => {
-            snakeBody.forEach((block) => {
+            snakeBody.current.forEach((block) => {
                 context.fillStyle = 'green';
                 context.fillRect(block.x * tileSize, block.y * tileSize, tileSize, tileSize);
             });
         };
 
-        window.addEventListener('keydown', calcMovement);
-
         const interval = setInterval(() => {
-            move();
             drawCanvas();
             drawFood();
             drawSnake();
+            move();
         }, 50);
 
-        return () => {
-            clearInterval(interval);
-            removeEventListener('keydown', calcMovement);
-        };
+        return () => clearInterval(interval);
 
+    }, []); 
+
+    useEffect(() => {
+        window.addEventListener('keydown', calcMovement);
+        return () => window.removeEventListener('keydown', calcMovement);
     }, []);
+
 
 
     return (

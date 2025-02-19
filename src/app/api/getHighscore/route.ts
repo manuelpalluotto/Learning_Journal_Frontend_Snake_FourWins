@@ -14,8 +14,8 @@ export async function GET() {
             }
         });
         return NextResponse.json(scores);
-    } catch (err) {
-        console.error(err);
+    } catch (err: any) {
+        console.log(err.stack);
         return NextResponse.json({ error: 'An error occurred' }, { status: 500 });
     }
 }
