@@ -3,12 +3,7 @@ import '@/css/snake.css';
 import { useEffect, useRef, useState } from 'react';
 
 export default function Snake() {
-
-
-    const [gameOver, setGameOver] = useState<boolean>(false);
-
     const canvasRef = useRef<HTMLCanvasElement>(null);
-
     const blocksize: number = 15;
     const canvasHeight: number = 50 * blocksize;
     const canvasWidth: number = 75 * blocksize;
@@ -20,12 +15,7 @@ export default function Snake() {
     const direction = useRef<string>('');
     const snakeHead = useRef<{ x: number, y: number }>({ x: snakeBody.current[0].x, y: snakeBody.current[0].y });
 
-
-    //feste werte statt dynamisch
-    //mehr logs
-    //
-
-    const calcMovement = (event: KeyboardEvent) => {  //fertig                           
+    const calcMovement = (event: KeyboardEvent) => {
         if (event.key === 'ArrowLeft' && direction.current !== 'right') {
             direction.current = 'left';
         }
@@ -40,57 +30,42 @@ export default function Snake() {
         }
     };
 
-    const move = () => {                   //von -- auf -= geändert, weil -- mich nur einen pixel bewegt
+    const move = () => {
         if (direction.current === 'left') {
             snakeHead.current.x -= blocksize;
-        }
-         if (direction.current === 'right') {
+        } else if (direction.current === 'right') {
             snakeHead.current.x += blocksize;
-        }
-         if (direction.current === 'up') {
+        } else if (direction.current === 'up') {
             snakeHead.current.y -= blocksize;
-        }
-         if (direction.current === 'down') {
+        } else if (direction.current === 'down') {
             snakeHead.current.y += blocksize;
         }
         eatFood();
     };
 
-    const eatFood = () => {//fertig
-        if (snakeHead.current.x === food.current.x && snakeHead.current.y === food.current.y) { 
-            console.log('essen gefunden ', 'neue länge: ', snakeBody.current.length);
-            snakeBody.current.push({...food.current}); //statt food.current lieber ...food.current (Spread-operator) speichert ein eigenständiges objekt
-            console.log('gegessen ', 'neue länge: ', snakeBody.current.length);
+    const eatFood = () => {
+        if (snakeHead.current.x === food.current.x && snakeHead.current.y === food.current.y) {
+            snakeBody.current.push({ ...food.current });
             generateFood();
             setScore((prevScore) => prevScore + 1);
         }
     };
 
-    const generateFood = () => {//fertig
-
+    const generateFood = () => {
         food.current.x = Math.floor(Math.random() * (canvasWidth / blocksize)) * blocksize;
         food.current.y = Math.floor(Math.random() * (canvasHeight / blocksize)) * blocksize;
-        console.log('food', food.current);
     };
 
-    const generateSnake = () => {//fertig
+    const generateSnake = () => {
+        snakeBody.current.length = 1;
         snakeBody.current[0].x = Math.floor(Math.random() * (canvasWidth / blocksize)) * blocksize;
         snakeBody.current[0].y = Math.floor(Math.random() * (canvasHeight / blocksize)) * blocksize;
-        console.log(snakeBody.current[0].x, snakeBody.current[0].y);
+        snakeHead.current = { ...snakeBody.current[0] };
     };
-
-    // const headHitsBody = () => {//fertig
-    //     if (snakeBody.current.length > 3) {
-    //         return snakeBody.current.some((bodyPart) => snakeHead.current === bodyPart);
-    //     }
-    //     return false;
-    // };
 
     const headHitsBody = () => {
         if (snakeBody.current.length > 3) {
-            //'index' in der klammer ermöglicht es mir, mit einem bestimmten element des arrays etwas zu tun
             return snakeBody.current.some((bodyPart, index) => {
-                //.some() prüft ob mindestens ein element im array die bedingung erfüllt
                 if (index === 0) return false; // Skip head
                 return snakeHead.current.x === bodyPart.x && snakeHead.current.y === bodyPart.y;
             });
@@ -98,72 +73,31 @@ export default function Snake() {
         return false;
     };
 
-    const overTop = () => {//fertig
-        if (snakeHead.current.y < 0) {
-            return true;
-        }
-    };
+    const overTop = () => snakeHead.current.y < 0;
+    const belowBottom = () => snakeHead.current.y >= canvasHeight;
+    const outOfLeftBound = () => snakeHead.current.x < 0;
+    const outOfRightBound = () => snakeHead.current.x >= canvasWidth;
 
-    const belowBottom = () => {//fertig
-        if (snakeHead.current.y > canvasHeight) {
+    const loseConditions = () => {
+        if (headHitsBody() || overTop() || belowBottom() || outOfLeftBound() || outOfRightBound()) {
+            alert('Game Over');
             return true;
         }
-    };
-
-    const outOfLeftBound = () => {//fertig
-        if (snakeHead.current.x < 0) {
-            return true;
-        }
-    };
-
-    const outOfRightBound = () => {//fertig
-        if (snakeHead.current.x > canvasWidth) {
-            return true;
-        }
-    };
-
-    const loseConditions = () => {//fertig
-        if (headHitsBody()) {
-            alert('Head Collided With Body. Game Over.');
-            setGameOver(true);
-            return true;
-        }
-        if (overTop()) {
-            alert('Collided With Top Bound. Game Over.');
-            setGameOver(true);
-            return true;
-        }
-        if (belowBottom()) {
-            alert('Collided With Bottom Bound. Game Over.');
-            setGameOver(true);
-            return true;
-        }
-        if (outOfLeftBound()) {
-            alert('Collided With Left Bound. Game Over.');
-            setGameOver(true);
-            return true;
-        }
-        if (outOfRightBound()) {
-            alert('Collided With Right Bound. Game Over.');
-            setGameOver(true);
-            return true;
-        } 
         return false;
-        
     };
 
-    const resetScore = () => {//fertig
+    const resetScore = () => {
         if (score > highScore) {
-            setHighScore((prevHighScore) => prevHighScore = score);
+            setHighScore(score);
         }
-        setScore((prevScore) => prevScore = 0);
+        setScore(0);
     };
 
-    const resetDirection = () => {//fertig
+    const resetDirection = () => {
         direction.current = '';
     };
 
-    const resetGame = () => {//fertig
+    const resetGame = () => {
         if (loseConditions()) {
             resetScore();
             resetDirection();
@@ -179,9 +113,7 @@ export default function Snake() {
     };
 
     const drawCanvas = () => {
-
         const context = canvasRef.current?.getContext('2d');
-
         if (!context) {
             return;
         }
@@ -189,48 +121,25 @@ export default function Snake() {
         context.clearRect(0, 0, canvasWidth, canvasHeight);
         context.fillStyle = 'black';
         context.fillRect(0, 0, canvasWidth, canvasHeight);
-   
-
 
         context.fillStyle = 'red';
         context.fillRect(food.current.x, food.current.y, blocksize, blocksize);
-    
 
         snakeBody.current.forEach((block) => {
             context.fillStyle = 'green';
             context.fillRect(block.x, block.y, blocksize, blocksize);
         });
-    
     };
 
-   
-    //hier zwei useeffects, weil je ein useEffect seine eigene aufgabe bekommt
     useEffect(() => {
-        const interval = setInterval(drawGame, 50);
+        const interval = setInterval(drawGame, 100);
         return () => clearInterval(interval);
-
     }, []);
-
-
-
 
     useEffect(() => {
         window.addEventListener('keydown', calcMovement);
         return () => window.removeEventListener('keydown', calcMovement);
     }, []);
-
-    useEffect(() => {
-        if (gameOver) {
-            setTimeout(() => {
-                resetScore();
-                resetDirection();
-                generateFood();
-                generateSnake();
-                setGameOver(false); // Spiel zurücksetzen
-            }, 100); // Gibt dem Rendering Zeit
-        }
-    }, [gameOver]);
-
 
     return (
         <>

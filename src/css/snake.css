@@ -1,4 +1,6 @@
 .body-container {
+    width: 100vw;
+    height: 90vh;
     margin-top: 5rem;
     display: flex;
     justify-content: center;
