@@ -37,7 +37,7 @@ export default function Snake() {
         context!.fillRect(snakeBody.current[0].x, snakeBody.current[0].y, blocksize, blocksize);
 
 
-        snakeBody.current.forEach( (block) => {
+        snakeBody.current.forEach((block) => {
             context!.fillStyle = 'red';
             context!.fillRect(food.current.x, food.current.y, blocksize, blocksize);
         });
@@ -63,11 +63,11 @@ export default function Snake() {
         }
     };
 
-   
+
 
     const move = () => {
 
-        
+
         if (direction.current === 'left') {
             console.log('fahre nach links');
             snakeBody.current[0].x -= blocksize;
@@ -107,6 +107,14 @@ export default function Snake() {
         }
     };
 
+    const gameLoop = () => {
+        move();
+        if (losingCondition()) {
+            return;
+        }
+        drawCanvas();
+    };
+
 
     useEffect(() => {
         window.addEventListener('keydown', keypressed);
@@ -114,20 +122,10 @@ export default function Snake() {
     });
 
 
-    useEffect(() => {
-        drawCanvas();
-        move();
-    }, []);
-
-    useEffect( () => {
-        const gameInterval = setInterval( () => {
-            move();
-            return () => clearInterval;
-        }, 100);
-    });
-
-    
-
+   useEffect( () => {
+    const gameInterval = setInterval(gameLoop, 100);
+    return () => clearInterval(gameInterval);
+   });
 
 
     return (
