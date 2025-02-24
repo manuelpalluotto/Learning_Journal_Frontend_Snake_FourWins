@@ -9,19 +9,17 @@ export default function Snake() {
 
     const canvasRef = useRef<HTMLCanvasElement>(null);
 
-    const canvasWidth: number = 30 * blocksize;
-    const canvasHeight: number = 20 * blocksize;
+    const canvasWidth: number = 60 * blocksize;
+    const canvasHeight: number = 40 * blocksize;
 
     const [score, setScore] = useState<number>(0);
     const [highScore, setHighScore] = useState<number>(0);
 
-    const food = useRef<{ x: number, y: number }>({ x: Math.floor(Math.random() * canvasWidth / blocksize) * blocksize, y: Math.floor(Math.random() * canvasHeight / blocksize) * blocksize });
-
+    const [food, setFood] = useState<{ x: number, y: number }>({ x: Math.floor(Math.random() * canvasWidth / blocksize) * blocksize, y: Math.floor(Math.random() * canvasHeight / blocksize) * blocksize });
+    const [snakeLength, setSnakeLength] = useState<number>(1);
     const snakeBody = useRef<{ x: number, y: number }[]>([{ x: Math.floor(Math.random() * canvasWidth / blocksize) * blocksize, y: Math.floor(Math.random() * canvasHeight / blocksize) * blocksize }]);
-
+    const snakeHead = useRef<{ x: number, y: number }>({ x: snakeBody.current[0].x, y: snakeBody.current[0].y });
     const direction = useRef<string>('');
-
-
 
     const drawCanvas = () => {
 
@@ -33,13 +31,13 @@ export default function Snake() {
         context!.fillStyle = 'black';
         context!.fillRect(0, 0, canvasWidth, canvasHeight);
 
-        context!.fillStyle = 'lime';
-        context!.fillRect(snakeBody.current[0].x, snakeBody.current[0].y, blocksize, blocksize);
+        context!.fillStyle = 'red';
+        context!.fillRect(food.x, food.y, blocksize, blocksize);
 
+        snakeBody.current.forEach((block, index) => {
 
-        snakeBody.current.forEach((block) => {
-            context!.fillStyle = 'red';
-            context!.fillRect(food.current.x, food.current.y, blocksize, blocksize);
+            context!.fillStyle = index === 0 ? 'pink' : 'lime';
+            context!.fillRect(block.x, block.y, blocksize, blocksize);
         });
     };
 
@@ -64,8 +62,23 @@ export default function Snake() {
     };
 
 
+    const eat = () => {
+        if (snakeBody.current[0].x === food.x && snakeBody.current[0].y === food.y) {
+            console.log('food eaten');
+            const newFood = {
+                x: Math.floor(Math.random() * (canvasWidth / blocksize)) * blocksize,
+                y: Math.floor(Math.random() * (canvasHeight / blocksize)) * blocksize
+            };
+            setFood(newFood);
+            snakeBody.current.push({ ...snakeBody.current[snakeBody.current.length - 1] });
+        }
+    };
 
     const move = () => {
+
+        for (let i = snakeBody.current.length - 1; i > 0; i--) {
+            snakeBody.current[i] = { ...snakeBody.current[i - 1] };
+        }
 
 
         if (direction.current === 'left') {
@@ -105,14 +118,24 @@ export default function Snake() {
             alert('collision down');
             return true;
         }
+        if (snakeBody.current.length > 3) {
+            snakeBody.current.forEach((block) => {
+                if (snakeBody.current[0].x === block.x && snakeBody.current[0].y === block.y) {
+                    alert('collision with head');
+                    return true;
+                }
+            });
+        }
     };
 
     const gameLoop = () => {
         move();
+        eat();
         if (losingCondition()) {
             return;
         }
         drawCanvas();
+
     };
 
 
@@ -122,10 +145,10 @@ export default function Snake() {
     });
 
 
-   useEffect( () => {
-    const gameInterval = setInterval(gameLoop, 100);
-    return () => clearInterval(gameInterval);
-   });
+    useEffect(() => {
+        const gameInterval = setInterval(gameLoop, 50);
+        return () => clearInterval(gameInterval);
+    },);
 
 
     return (
