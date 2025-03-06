@@ -1,6 +1,8 @@
 'use client';
 import '@/css/snake.css';
 import { useRef, useState, useEffect } from "react";
+import Navbar from './Navbar';
+import Sidenav from './Sidenav';
 
 
 export default function Snake() {
@@ -16,10 +18,13 @@ export default function Snake() {
     const [highScore, setHighScore] = useState<number>(0);
 
     const [food, setFood] = useState<{ x: number, y: number }>({ x: Math.floor(Math.random() * canvasWidth / blocksize) * blocksize, y: Math.floor(Math.random() * canvasHeight / blocksize) * blocksize });
-    const [snakeLength, setSnakeLength] = useState<number>(1);
     const snakeBody = useRef<{ x: number, y: number }[]>([{ x: Math.floor(Math.random() * canvasWidth / blocksize) * blocksize, y: Math.floor(Math.random() * canvasHeight / blocksize) * blocksize }]);
-    const snakeHead = useRef<{ x: number, y: number }>({ x: snakeBody.current[0].x, y: snakeBody.current[0].y });
     const direction = useRef<string>('');
+
+    const newFood = {
+        x: Math.floor(Math.random() * (canvasWidth / blocksize)) * blocksize,
+        y: Math.floor(Math.random() * (canvasHeight / blocksize)) * blocksize
+    };
 
     const drawCanvas = () => {
 
@@ -65,12 +70,9 @@ export default function Snake() {
     const eat = () => {
         if (snakeBody.current[0].x === food.x && snakeBody.current[0].y === food.y) {
             console.log('food eaten');
-            const newFood = {
-                x: Math.floor(Math.random() * (canvasWidth / blocksize)) * blocksize,
-                y: Math.floor(Math.random() * (canvasHeight / blocksize)) * blocksize
-            };
-            setFood(newFood);
+            setScore(prevScore => (prevScore + 1));
             snakeBody.current.push({ ...snakeBody.current[snakeBody.current.length - 1] });
+            setFood(newFood);
         }
     };
 
@@ -79,22 +81,16 @@ export default function Snake() {
         for (let i = snakeBody.current.length - 1; i > 0; i--) {
             snakeBody.current[i] = { ...snakeBody.current[i - 1] };
         }
-
-
         if (direction.current === 'left') {
-            console.log('fahre nach links');
             snakeBody.current[0].x -= blocksize;
         }
         if (direction.current === 'right') {
-            console.log('fahre nach rechts');
             snakeBody.current[0].x += blocksize;
         }
         if (direction.current === 'up') {
-            console.log('fahre nach oben');
             snakeBody.current[0].y -= blocksize;
         }
         if (direction.current === 'down') {
-            console.log('fahre nach oben');
             snakeBody.current[0].y += blocksize;
         }
     };
@@ -104,36 +100,49 @@ export default function Snake() {
 
         if (snakeBody.current[0].x < 0) {
             alert('collision left');
+            //resetGame();
             return true;
         }
         if (snakeBody.current[0].x > canvasWidth) {
             alert('collision right');
+            //resetGame();
             return true;
         }
         if (snakeBody.current[0].y < 0) {
             alert('collision up');
+            //resetGame();
             return true;
         }
         if (snakeBody.current[0].y > canvasHeight) {
             alert('collision down');
+            //resetGame();
             return true;
         }
         if (snakeBody.current.length > 3) {
-            snakeBody.current.forEach((block) => {
-                if (snakeBody.current[0].x === block.x && snakeBody.current[0].y === block.y) {
+                if (snakeBody.current.some((block, index) => index !== 0 && snakeBody.current[0].x === block.x && snakeBody.current[0].y === block.y)) {
                     alert('collision with head');
+                    //resetGame();
                     return true;
                 }
-            });
+        }
+    };
+
+    const resetGame = () => {
+        setFood(newFood);
+        snakeBody.current = [{x: Math.floor(Math.random() * canvasWidth / blocksize) * blocksize, y: Math.floor(Math.random() * canvasHeight / blocksize) * blocksize}];
+        direction.current = '';
+        setScore(0);
+        if (score > highScore) {
+            setHighScore(score);
         }
     };
 
     const gameLoop = () => {
+        if (losingCondition()) {
+            resetGame();
+        }
         move();
         eat();
-        if (losingCondition()) {
-            return;
-        }
         drawCanvas();
 
     };
@@ -153,6 +162,8 @@ export default function Snake() {
 
     return (
         <>
+        <Navbar />
+        {/*<Sidenav />*/}
             <div className='body-container'>
                 <div className='game-container'>
                     <div className='score-container'>
