@@ -119,17 +119,17 @@ export default function Snake() {
             return true;
         }
         if (snakeBody.current.length > 3) {
-                if (snakeBody.current.some((block, index) => index !== 0 && snakeBody.current[0].x === block.x && snakeBody.current[0].y === block.y)) {
-                    alert('collision with head');
-                    //resetGame();
-                    return true;
-                }
+            if (snakeBody.current.some((block, index) => index !== 0 && snakeBody.current[0].x === block.x && snakeBody.current[0].y === block.y)) {
+                alert('collision with head');
+                //resetGame();
+                return true;
+            }
         }
     };
 
     const resetGame = () => {
         setFood(newFood);
-        snakeBody.current = [{x: Math.floor(Math.random() * canvasWidth / blocksize) * blocksize, y: Math.floor(Math.random() * canvasHeight / blocksize) * blocksize}];
+        snakeBody.current = [{ x: Math.floor(Math.random() * canvasWidth / blocksize) * blocksize, y: Math.floor(Math.random() * canvasHeight / blocksize) * blocksize }];
         direction.current = '';
         setScore(0);
         if (score > highScore) {
@@ -162,9 +162,9 @@ export default function Snake() {
 
     return (
         <>
-        <Navbar />
-        {/*<Sidenav />*/}
+            <Navbar />
             <div className='body-container'>
+            <Sidenav />
                 <div className='game-container'>
                     <div className='score-container'>
                         <span className='score'>Score: {score}</span>

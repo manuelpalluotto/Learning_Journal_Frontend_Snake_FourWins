@@ -1,3 +1,14 @@
 .sidenav-container {
-    border: 1px solid var(--youtubeFont);
+    margin-left: 1rem;
+    position: fixed;
+    left: 0;
+    top: 7rem;
+    height: 80vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+.sidenav-container > a {
+    font-size: 1.7rem;
 }
