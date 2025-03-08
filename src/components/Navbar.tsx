@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 export default function Navbar() {
 
-    const [isLoggedIn, setLoggedIn] = useState<boolean>(false);
+    const [isLoggedIn, setLoggedIn] = useState<boolean>(true);
     const [isPressed, setPressed] = useState<boolean>(false);
 
     const handleDropdownOnClick = () => {
