@@ -1,0 +1,28 @@
+.game-board {
+    position: absolute;
+    left: 30rem;
+    top: 8rem;
+    border: 1px solid var(--youtubeRed);
+    display: flex;
+    flex-direction: column;
+
+}
+
+.game-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--youtubeRed);
+
+}
+
+.player-turn {
+    color:var(--youtubeFont);
+    font-weight: 1000;
+}
+
+.indicator {
+    margin-left: 15px;
+    padding: 10px;
+    transition: transform 0.2s ease-in-out;
+}
