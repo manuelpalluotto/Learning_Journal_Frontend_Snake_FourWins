@@ -1,0 +1,25 @@
+.below--navbar-container {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.entries-container {
+    border: 1px solid white;
+    display: flex;
+    flex-direction: column;
+    margin-left: 3rem;
+    margin-top: 1rem;
+}
+
+.author {
+    border: 1px solid white;
+    width: 600px;
+    padding: 0.5rem;
+}
+
+.content {
+    border: 1px solid white;
+    height: 100%;
+    padding: 0.5rem;
+}

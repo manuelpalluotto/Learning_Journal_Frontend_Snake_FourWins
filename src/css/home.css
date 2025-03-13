@@ -1,0 +1,21 @@
+.content-container {
+    margin-left: 4rem;
+    margin-right: 1rem;
+    margin-top: 0.7rem;
+
+}
+
+.options--button-container {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.show--entries-button, 
+.create--entry-button, 
+.show--profile-button {
+    color: var(--youtubeFont);
+    background-color: var(--youtubeBackGray);
+    padding: 0.5rem;
+    border-radius: 10px;
+}

@@ -30,6 +30,7 @@ export default function Checkfour() {
             for (let r = 0; r < rows; r++) {
                 for (let c = 0; c < cols; c++) {
                     context.strokeRect(c * tilesize, r * tilesize, tilesize, tilesize);
+
                 }
             }
         }
@@ -43,30 +44,52 @@ export default function Checkfour() {
         }
     }
 
-    function dropStone(){
+    function dropStone() {
+        const ctx = canvasRef.current?.getContext('2d');
+        if (ctx) {
+            for (let r = rows - 1; r >= 0; r--) {
+                if (!board[r][selectedCol]) {
 
-    }
+                    ctx.fillStyle = player === 'Player 1' ? 'red' : 'yellow';
+                    ctx.beginPath();
 
-    function detectSpaceBar(e: KeyboardEvent) {
-        if (e.key === ' '){
-            dropStone();
-            console.log('stone dropped');
+                    // Calculate the x and y coordinates based on the column and row
+                    const x = (selectedCol + 0.5) * tilesize;
+                    const y = (r + 0.5) * tilesize;
+
+                    ctx.arc(x, y, tilesize / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    const newBoard = [...board];
+                    newBoard[r][selectedCol] = player;
+                    setBoard(newBoard);
+                    setPlayer(player === 'Player 1' ? 'Player 2' : 'Player 1');
+                    break;
+                }
+
+            }
         }
     }
 
-    useEffect( () => {
+    function detectSpaceBar(e: KeyboardEvent) {
+        if (e.key === ' ') {
+            dropStone();
+
+        }
+    }
+
+    useEffect(() => {
         window.addEventListener('keydown', detectSpaceBar);
         return () => window.removeEventListener('keydown', detectSpaceBar);
     });
 
     useEffect(() => {
-        window.addEventListener('keypress', moveLeftAndRight);
-        return () => window.removeEventListener('keypress', moveLeftAndRight);
+        window.addEventListener('keydown', moveLeftAndRight);
+        return () => window.removeEventListener('keydown', moveLeftAndRight);
     }, [selectedCol]);
 
     useEffect(() => {
         drawBoard();
-    }, [selectedCol]);
+    }, []);
 
     return (
         <>
