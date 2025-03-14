@@ -60,8 +60,8 @@ export default function Checkfour() {
     });
 
     useEffect(() => {
-        window.addEventListener('keypress', moveLeftAndRight);
-        return () => window.removeEventListener('keypress', moveLeftAndRight);
+        window.addEventListener('keydown', moveLeftAndRight);
+        return () => window.removeEventListener('keydown', moveLeftAndRight);
     }, [selectedCol]);
 
     useEffect(() => {
