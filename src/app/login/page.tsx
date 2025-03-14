@@ -14,7 +14,7 @@ export default function Login() {
         try {
             const data = await login(username, password);
             console.log('Login erfolgreich!', data);
-            setCookie('SessionID', data.sessionID);
+            setCookie('sessionID', data.sessionID);
         } catch (err) {
             setError('Login failed');
         }
