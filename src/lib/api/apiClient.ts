@@ -1,7 +1,9 @@
+import { getCookie } from "cookies-next";
+
 const API_BASE_URL = 'http://localhost:8080';
 
 export interface AuthResponse {
-    message?: string;
+    sessionID: string;
 }
 
 export interface JournalEntry {
@@ -59,12 +61,13 @@ export async function fetchUsers(): Promise<User[]> {
     const response = await fetch(
         `${API_BASE_URL}/users`, {
         method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${getCookie('sessionID')}`,
+        },
         credentials: 'include',
     }
     );
-
-
-
     if (!response.ok) {
         throw new Error('Fehler beim Laden der Benutzer');
     }

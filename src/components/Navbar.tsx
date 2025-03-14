@@ -4,6 +4,7 @@ import { TbBurger } from "react-icons/tb";
 import { CiSearch } from "react-icons/ci";
 import { useState } from 'react';
 import Searchbar from './searchbar';
+import Link from 'next/link';
 
 export default function Navbar() {
 
@@ -33,7 +34,7 @@ export default function Navbar() {
                         </div>
                     </div>
                     <div className='login-area'>
-                        {!isLoggedIn && <button className='login-button' onClick={() => handleLoginClick()}>Login</button>}
+                        {!isLoggedIn && <button className='login-button'><Link href='/login'>Login</Link></button>}
                         {isLoginPressed && <div className='login-window'>
                             <input className='user-span'></input>
                             <input className='password-span'></input>
