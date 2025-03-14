@@ -63,7 +63,6 @@ export async function fetchUsers(): Promise<User[]> {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${getCookie('sessionID')}`,
         },
         credentials: 'include',
     }
