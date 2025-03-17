@@ -1,6 +1,8 @@
 .sidenav-container {
+    margin-top: 1rem;
     margin-left: 1rem;
-
+    position: fixed;
+    left: 0;
     height: 80vh;
     display: flex;
     flex-direction: column;

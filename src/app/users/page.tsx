@@ -35,7 +35,6 @@ useEffect(() => {
     return (
         <>
             <Navbar />
-            <Searchbar />
             <div className='under--navbar-container'>
                 <Sidenav />
                 <div className='user-container'>

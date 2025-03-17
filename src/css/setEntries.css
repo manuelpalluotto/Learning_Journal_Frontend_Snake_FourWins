@@ -1,0 +1,24 @@
+* {
+    box-sizing: border-box;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--youtubeFont);
+}
+
+.entry-input {
+    padding: 0.5rem;
+    height: 100%;
+    width: 100%;
+    text-align: left;
+    white-space: pre-wrap;
+    background-color: var(--ytBackground);
+}
+
+.entry-display {
+    width: 500px;
+    height: 300px;
+}
+

@@ -18,6 +18,7 @@ export interface User {
     email: string;
     username: string;
     password: string;
+    role: string;
 }
 
 
@@ -27,8 +28,8 @@ export async function login(username: string, password: string): Promise<AuthRes
         method: "POST",
         headers: {
             'Content-Type': "application/json",
-            credentials: 'include',
         },
+        credentials: 'include',
         body: JSON.stringify({ username, password }),
     });
 
@@ -38,12 +39,13 @@ export async function login(username: string, password: string): Promise<AuthRes
     return response.json();
 }
 
-
-
 export async function fetchEntries(): Promise<JournalEntry[]> {
     const response = await fetch(
         `${API_BASE_URL}/entries`, {
         method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+        },
         credentials: 'include',
     });
 
@@ -52,9 +54,29 @@ export async function fetchEntries(): Promise<JournalEntry[]> {
     }
 
     return response.json();
-
 }
 
+export async function addEntry(entry: Omit<JournalEntry, "id">): Promise<Omit<JournalEntry, "id">> {
+    try {
+        const response = await fetch(`${API_BASE_URL}/entries/${entry.userId}`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(entry),
+        });
+
+        if (!response.ok) {
+            throw new Error("Fehler beim Speichern des Eintrags");
+        }
+
+        console.log("Eintrag erfolgreich gespeichert");
+        return entry;
+    } catch (error) {
+        console.error("Fehler:", error);
+        throw error;
+    }
+};
 
 
 export async function fetchUsers(): Promise<User[]> {
