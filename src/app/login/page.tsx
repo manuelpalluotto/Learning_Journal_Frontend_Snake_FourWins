@@ -1,27 +1,21 @@
 'use client';
-import { useState, useEffect } from 'react';
-import { login } from '@/lib/api/apiClient';
-import { setCookie } from 'cookies-next';
+import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
 
 
 export default function Login() {
 
+    const { loginUser, isLoggedIn } = useUser();
     const [username, setUsername] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const [error, setError] = useState<string | null>(null);
-    const { setLoggedIn } = useUser();
+
+
+
     const handleLogin = async () => {
         try {
-            const data = await login(username, password);
-            if (data) {
-                console.log('Login erfolgreich!', data);
-                setCookie('sessionID', data.sessionID);
-                setLoggedIn(true);
-                window.location.href = '/';
-            }
-        } catch (err) {
-            setError('Login failed');
+            await loginUser(username, password);
+        } catch (error) {
+            console.error(error);
         }
     };
 
@@ -43,7 +37,6 @@ export default function Login() {
                 />
                 <button type='submit'>Login</button>
             </form>
-            {error && <p>{error}</p>}
         </div>
     );
 }

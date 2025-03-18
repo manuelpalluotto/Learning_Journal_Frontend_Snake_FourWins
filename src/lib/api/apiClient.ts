@@ -1,10 +1,7 @@
-import { getCookie } from "cookies-next";
+import axios from 'axios';
 
-const API_BASE_URL = 'http://localhost:8080';
+const URL = 'http://localhost:8080/auth';
 
-export interface AuthResponse {
-    sessionID: string;
-}
 
 export interface JournalEntry {
     id: string;
@@ -21,77 +18,26 @@ export interface User {
     role: string;
 }
 
+const apiClient = axios.create({
+    baseURL: URL,
+    headers: { 'Content-Type': 'application/json', },
+},
+);
 
 
-export async function login(username: string, password: string): Promise<AuthResponse> {
-    const response = await fetch(`${API_BASE_URL}/login`, {
-        method: "POST",
-        headers: {
-            'Content-Type': "application/json",
-        },
-        credentials: 'include',
-        body: JSON.stringify({ username, password }),
-    });
-
-    if (!response.ok) {
-        throw new Error('Login fehlgeschlagen');
-    }
-    return response.json();
-}
-
-export async function fetchEntries(): Promise<JournalEntry[]> {
-    const response = await fetch(
-        `${API_BASE_URL}/entries`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-    });
-
-    if (!response.ok) {
-        throw new Error('Fehler beim Abrufen der Einträge');
-    }
-
-    return response.json();
-}
-
-export async function addEntry(entry: Omit<JournalEntry, "id">): Promise<Omit<JournalEntry, "id">> {
-    try {
-        const response = await fetch(`${API_BASE_URL}/entries/${entry.userId}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(entry),
-        });
-
-        if (!response.ok) {
-            throw new Error("Fehler beim Speichern des Eintrags");
+//interceptor fügt an jeden request den token an
+apiClient.interceptors.request.use(config => {
+    const token = localStorage.getItem('token');
+    if (token) {
+        if (config.headers) {
+            config.headers.Authorization = `Bearer ${token}`;
         }
-
-        console.log("Eintrag erfolgreich gespeichert");
-        return entry;
-    } catch (error) {
-        console.error("Fehler:", error);
-        throw error;
     }
-};
+    return config;
+}, error => {
+    return Promise.reject(error);
+});
+
+export default apiClient;
 
 
-export async function fetchUsers(): Promise<User[]> {
-    const response = await fetch(
-        `${API_BASE_URL}/users`, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        credentials: 'include',
-    }
-    );
-    if (!response.ok) {
-        throw new Error('Fehler beim Laden der Benutzer');
-    }
-
-    return response.json();
-}
