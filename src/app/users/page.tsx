@@ -1,10 +1,11 @@
 'use client';
-import { fetchUsers } from '@/lib/api/apiClient';
+import { fetchUsers } from '@/lib/api/apiMethods';
 import '@/css/users.css';
 import Navbar from "@/components/Navbar";
 import Sidenav from "@/components/Sidenav";
 import Searchbar from '@/components/searchbar';
 import { useState, useEffect } from 'react';
+import ProtectedRoute from '@/components/ProtectedRouter';
 
 interface User {
     id: string;
@@ -34,6 +35,7 @@ useEffect(() => {
 
     return (
         <>
+        <ProtectedRoute>
             <Navbar />
             <div className='under--navbar-container'>
                 <Sidenav />
@@ -52,6 +54,7 @@ useEffect(() => {
                     ))}
                 </div>
             </div>
+            </ProtectedRoute>
         </>
     );
 }

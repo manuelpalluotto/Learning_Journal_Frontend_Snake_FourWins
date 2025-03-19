@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const URL = 'http://localhost:8080/auth';
+const URL = 'http://localhost:8080/';
 
 
 export interface JournalEntry {
@@ -22,6 +22,17 @@ const apiClient = axios.create({
     baseURL: URL,
     headers: { 'Content-Type': 'application/json', },
 },
+);
+
+apiClient.interceptors.response.use(
+    response => response, 
+    error => {
+        if (error.response && error.response.status === 401) {
+            localStorage.removeItem('token');
+            window.location.href = '/login';
+        }
+        return Promise.reject(error);
+    }
 );
 
 

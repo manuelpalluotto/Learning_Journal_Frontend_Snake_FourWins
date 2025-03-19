@@ -11,6 +11,10 @@
     padding: 0.5rem;
 }
 
+.author-field {
+    background-color: var(--ytBackground);;
+}
+
 .entry-input {
     padding: 0.5rem;
     height: 100%;

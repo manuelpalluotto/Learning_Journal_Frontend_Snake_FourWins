@@ -6,7 +6,12 @@ export async function login(username: string, password: string): Promise<string>
     const response = await apiClient.post<{ token: string }>(
         '/login', { username, password }
     );
-    return response.data.token;
+
+    const token = response.data.token;
+
+    localStorage.setItem('token', token);
+
+    return token;
 }
 
 export async function fetchEntries(): Promise<JournalEntry[]> {
