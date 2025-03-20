@@ -1,17 +1,33 @@
-
-
 .titlebar {
-    padding-inline: 1rem;
-    padding-top: 1rem;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #333;
+    color: white;
+    padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
 }
 
 .wrapper-container__titlebar {
     display: flex;
     align-items: center;
-    
+}
+
+.burger-container {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+}
+
+.burger-icon {
+    font-size: 2rem;
+    color: white;
 }
 
 .site-icon {
@@ -19,43 +35,26 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 1.5rem;
-    color: var(--youtubeFont);
-    justify-self: flex-start;
     font-weight: 800;
-    position: relative;
-}
-
-.burger-icon {
-    font-size: 2rem;
-    color: var(--youtubeFont);
-    margin-right: 1rem;
-    position: relative;
-}
-
-.manu-icon {
-    color: var(--youtubeRed);
-    position: relative;
-}
-
-.login-button {
-    position: relative;
+    color: #ff5555;
 }
 
 .options--button-container {
     display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin: 0 auto;
+    gap: 1rem;
 }
 
-.login-area {
-    display: flex;
-    align-items: center;
+.nav-button, .login-button {
+    background: white;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
 }
 
-input:focus,
-select:focus,
-textarea:focus,
-button:focus {
-    outline: none;
+.nav-button:hover, .login-button:hover {
+    background: #ff5555;
+    color: white;
 }

@@ -5,12 +5,12 @@ import { FaChessBoard } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 
 
-export default function Sidenav() {
+export default function Sidenav({ isOpen }: { isOpen: boolean }) {
     return (
-        <div className='sidenav-container'>
-            <Link href="/"><FaHome /></Link>
-            <Link href="/snake"> <VscSnake /></Link>
-            <Link href="/checkfour"><FaChessBoard /></Link>
-        </div>
+        <aside className={`sidenav-container ${isOpen ? 'open' : ''}`}>
+            <Link href='/'><FaHome /> Home</Link>
+            <Link href='/snake'><VscSnake /> Snake</Link>
+            <Link href='/checkfour'><FaChessBoard /> Chess</Link>
+        </aside>
     );
 } 

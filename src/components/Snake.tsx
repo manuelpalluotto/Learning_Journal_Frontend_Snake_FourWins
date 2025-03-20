@@ -164,9 +164,7 @@ export default function Snake() {
 
     return (
         <>
-            <Navbar />
             <div className='body-container'>
-            <Sidenav />
                 <div className='game-container'>
                     <div className='score-container'>
                         <span className='score'>Score: {score}</span>

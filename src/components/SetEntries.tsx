@@ -32,7 +32,9 @@ export default function SetEntries() {
         const newEntry: Omit<JournalEntry, 'id'> = {
             author,
             entry,
-            userId: currentUser.id
+            timestamp: new Date().toISOString(), 
+            userId: currentUser.id, 
+            
         };
 
         console.log('New Entry:', newEntry);
@@ -48,29 +50,36 @@ export default function SetEntries() {
     };
 
     return (
-        <div>
-            <div className='form-container'>
-                <form onSubmit={handleSubmit} className='entry-input'>
-                    <input className='author-field'
-                        type='text'
-                        placeholder='Author'
+        <div className="form-container">
+            <form onSubmit={handleSubmit} className="entry-form">
+                <fieldset>
+                    <legend>Neuer Eintrag</legend>
+                    <label htmlFor="author">Autor</label>
+                    <input 
+                        id="author"
+                        className="author-field"
+                        type="text"
+                        placeholder="Autor"
                         value={author}
                         onChange={(e) => setAuthor(e.target.value)}
+                        required
                     />
-                    
-                    <div>
-                        <textarea className='entry-input'
-                            placeholder='Your entry...' 
-                            value={entry}
-                            onChange={(e) => setEntry(e.target.value)}
-                        />
+
+                    <label htmlFor="entry">Eintrag</label>
+                    <textarea 
+                        id="entry"
+                        className="entry-input"
+                        placeholder="Dein Eintrag..."
+                        value={entry}
+                        onChange={(e) => setEntry(e.target.value)}
+                        required
+                    />
+
+                    <div className="form-button-container">
+                        <button type="submit" className="submit-button">Speichern</button>
                     </div>
-                    
-                    <div>
-                        <button type='submit'>Submit</button>
-                    </div>
-                </form>
-            </div>
+                </fieldset>
+            </form>
         </div>
     );
 }

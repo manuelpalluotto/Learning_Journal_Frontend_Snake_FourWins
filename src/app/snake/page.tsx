@@ -1,6 +1,23 @@
+'use client';
+
 import Snake from "@/components/Snake";
-import Image from "next/image";
+import ProtectedRoute from "@/components/ProtectedRouter";
+import Sidenav from "@/components/Sidenav";
+import Navbar from "@/components/Navbar";
+import { useState } from "react";
+
 
 export default function SnakePage() {
-  return (<Snake />);
+
+  const [isSidenavOpen, setIsSidenavOpen] = useState<boolean>(false);
+
+  return (
+    <>
+      <ProtectedRoute>
+        <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
+        <Sidenav isOpen={isSidenavOpen} />
+        <Snake />
+      </ProtectedRoute>
+    </>
+  );
 }

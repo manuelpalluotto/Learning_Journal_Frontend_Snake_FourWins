@@ -4,29 +4,29 @@ import { TbBurger } from "react-icons/tb";
 import Link from 'next/link';
 import { useUser } from '@/app/context/UserContext';
 
-export default function Navbar() {
+export default function Navbar({ toggleSidenav }: { toggleSidenav: () => void }) {
     const { isLoggedIn } = useUser();
 
 
 
     return (
-        <>
-            <div className='titlebar'>
-                <div className='wrapper-container__titlebar'>
-                    <div className='burger-container'><TbBurger className='burger-icon' /></div>
-                    <div className='site-icon'>
-                        <FaBong className='manu-icon' />
-                        <span>Manu Solutions</span>
-                    </div>
-                </div>
-                <div className='options--button-container'>
-                            <button className='show--entries-button'><Link href='/getEntries'>Einträge anzeigen</Link></button>
-                            <button className='create--entry-button'><Link href='/postEntries'>Eintrag erstellen</Link></button>
-                        </div>
-                <div className='login-area'>
-                    {!isLoggedIn && <button className='login-button'><Link href='/login'>Login</Link></button>}
+        <nav className='titlebar'>
+            <div className='wrapper-container__titlebar'>
+                <button className='burger-container' onClick={toggleSidenav}>
+                    <TbBurger className='burger-icon' />
+                </button>
+                <div className='site-icon'>
+                    <FaBong className='manu-icon' />
+                    <span>Manu Solutions</span>
                 </div>
             </div>
-        </>
+            <div className='options--button-container'>
+                <Link href='/getEntries' className='nav-button'>Einträge anzeigen</Link>
+                <Link href='/postEntries' className='nav-button'>Eintrag erstellen</Link>
+            </div>
+            <div className='login-area'>
+                {!isLoggedIn && <Link href='/login' className='login-button'>Login</Link>}
+            </div>
+        </nav>
     );
 }

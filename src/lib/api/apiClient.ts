@@ -5,8 +5,9 @@ const URL = 'http://localhost:8080/';
 
 export interface JournalEntry {
     id: string;
-    entry: string;
     author: string;
+    entry: string;
+    timestamp: string; 
     userId: string;
 }
 
@@ -16,11 +17,13 @@ export interface User {
     username: string;
     password: string;
     role: string;
+    classroom: string;
 }
 
 const apiClient = axios.create({
     baseURL: URL,
     headers: { 'Content-Type': 'application/json', },
+    withCredentials: true,
 },
 );
 

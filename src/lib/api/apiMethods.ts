@@ -29,7 +29,9 @@ export async function fetchUsers(): Promise<User[]> {
     return response.data;
 }
 
+
+
 export async function addUser(user: Omit<User, 'id'>): Promise<User> {
-    const response = await apiClient.post<User>('/users', user);
+    const response = await apiClient.post<User>('/register', user);
     return response.data;
 }

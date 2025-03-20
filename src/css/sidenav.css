@@ -1,14 +1,35 @@
 .sidenav-container {
-    margin-top: 1rem;
-    margin-left: 1rem;
     position: fixed;
-    left: 0;
-    height: 80vh;
+    top: 0;
+    left: -250px; /* Start außerhalb des Bildschirms */
+    width: 250px;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    transition: left 0.3s ease-in-out;
 }
-.sidenav-container > a {
-    font-size: 1.7rem;
+
+.sidenav-container.open {
+    left: 0; /* Kommt ins Bild */
+}
+
+.sidenav-container a {
+    color: white;
+    font-size: 1.5rem;
+    text-decoration: none;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: 0.3s;
+}
+
+.sidenav-container a:hover {
+    background: #ff5555;
+    width: 100%;
+    text-align: center;
 }

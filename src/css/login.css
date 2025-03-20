@@ -1,80 +1,91 @@
-/* Allgemeines Styling */
-* {
-    box-sizing: border-box;
-}
-
 body {
     font-family: 'Inter', sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
     height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     margin: 0;
 }
 
-/* Container für das Formular */
-.form-container {
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+
+
+/* Login-Karte */
+.login-card {
     background: white;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    max-width: 500px;
-    width: 100%;
     text-align: center;
+    max-width: 400px;
+    width: 100%;
 }
 
-/* Formularfeldset */
-fieldset {
-    border: none;
-    padding: 0;
-}
-
-legend {
-    font-size: 1.5rem;
-    font-weight: bold;
+/* Titel */
+h1 {
     margin-bottom: 1rem;
+    color: #333;
 }
 
 /* Eingabefelder */
-label {
-    display: block;
-    font-weight: bold;
-    margin: 0.5rem 0 0.2rem;
-}
-
-input, textarea {
+input {
     width: 100%;
     padding: 12px;
-    margin-bottom: 10px;
+    margin: 8px 0;
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
     transition: border 0.3s ease;
+    color: black;
 }
 
-input:focus, textarea:focus {
+input:focus {
     border-color: #667eea;
     outline: none;
 }
 
-/* Speichern-Button */
-.form-button-container {
-    text-align: center;
-    margin-top: 1rem;
-}
-
-.submit-button {
+/* Login-Button */
+.login-button {
+    width: 100%;
     background: #667eea;
     color: white;
     border: none;
-    padding: 12px 18px;
+    padding: 12px;
     border-radius: 6px;
     font-size: 1rem;
     cursor: pointer;
     transition: background 0.3s ease;
 }
 
-.submit-button:hover {
+.login-button:hover {
     background: #5a67d8;
+}
+
+/* Fehlermeldung */
+.error-message {
+    color: red;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+/* Registrierungslink */
+.register-link {
+    margin-top: 1rem;
+    font-size: 0.9rem;
+}
+
+.register-link a {
+    color: #667eea;
+    text-decoration: none;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
 }

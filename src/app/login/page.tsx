@@ -1,4 +1,5 @@
 'use client';
+import '@/css/login.css';
 import React, { useState, useEffect } from 'react';
 import { useUser } from '../context/UserContext';
 import { useRouter } from 'next/navigation';
@@ -21,24 +22,38 @@ export default function Login() {
         }
     };
 
+
     return (
-        <div className='login-form'>
-            <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
-                <h2>Login</h2>
-                <input
-                    type='text'
-                    placeholder='Username'
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-                <input
-                    type='password'
-                    placeholder='Password'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-                <button type='submit'>Login</button>
-            </form>
-        </div>
+        <main className="login-container">
+            <section className="login-card">
+                <h1>Anmelden</h1>
+                <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
+                    <label htmlFor="username">Benutzername</label>
+                    <input
+                        id="username"
+                        type="text"
+                        placeholder="Benutzername"
+                        value={username}
+                        onChange={(e) => setUsername(e.target.value)}
+                        required
+                    />
+
+                    <label htmlFor="password">Passwort</label>
+                    <input
+                        id="password"
+                        type="password"
+                        placeholder="Passwort"
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
+                        required
+                    />
+
+                    <button type="submit" className="login-button">Login</button>
+                </form>
+                <p className="register-link">
+                    Noch kein Konto? <a href="/register">Registrieren</a>
+                </p>
+            </section>
+        </main>
     );
 }
