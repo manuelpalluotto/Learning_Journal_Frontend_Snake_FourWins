@@ -85,3 +85,6 @@ body {
     margin-top: 20px;
 } 
 
+.entry-card:last-child {
+    border-bottom: none;
+}

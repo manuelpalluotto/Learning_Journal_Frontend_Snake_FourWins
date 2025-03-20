@@ -10,12 +10,5 @@ export default function RegisterPage() {
     const [isSidenavOpen, setIsSidenavOpen] = useState<boolean>(false);
 
 
-    return (
-        <>
-            <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
-            <Sidenav isOpen={isSidenavOpen} />
-            <Register />
-
-        </>
-    );
+    return <Register />;
 }
