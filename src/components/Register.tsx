@@ -30,16 +30,27 @@ export default function Register() {
             role: 'USER',
             classroom,
         };
-
+    
         console.log(userData);
         try {
-            await addUser(userData);
-        } catch (error) {
+            const response = await addUser(userData);
+    
+            if (response && response.email) {  
+                alert("Registrierung erfolgreich! Überprüfe deine E-Mail für die Bestätigung.");
+            } 
+        } catch (error: any) {
             console.error(error);
+    
+            if (error.response && error.response.data && error.response.data.message) {
+                alert("Fehler: " + error.response.data.message);
+            } else {
+                alert("Ein Fehler ist aufgetreten. Bitte versuche es erneut.");
+            }
         }
     };
     
-    
+    //!noch eine db entity anlegen!
+
     return (
         <main className="register-container">
 
@@ -50,7 +61,6 @@ export default function Register() {
 
                 <h1>Registrieren</h1>
                 <form onSubmit={(e) => { e.preventDefault(); handleRegister(); }}>
-                    <label htmlFor="username">Benutzername</label>
                     <input className='username-input'
                         id="username"
                         type="text"
@@ -60,7 +70,6 @@ export default function Register() {
                         required
                     />
 
-                    <label htmlFor="password">Passwort</label>
                     <input className='password-input'
                         id="password"
                         type="password"
@@ -69,7 +78,6 @@ export default function Register() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <label htmlFor="email">E-Mail</label>
                     <input className='email-input'
                         id="email"
                         type="email"
@@ -80,6 +88,9 @@ export default function Register() {
                     />
 
                     <button type="submit" className="login-button">Registrieren</button>
+                    <p className="login-link">
+                    Schon ein Konto? <a href="/login">Einloggen</a>
+                </p>
                 </form>
                 
 
