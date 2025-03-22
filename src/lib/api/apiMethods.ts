@@ -30,8 +30,11 @@ export async function fetchUsers(): Promise<User[]> {
 }
 
 
-
 export async function addUser(user: Omit<User, 'id'>): Promise<User> {
     const response = await apiClient.post<User>('/register', user);
     return response.data;
+}
+
+export async function logout() {
+    localStorage.removeItem('token');
 }
