@@ -61,9 +61,7 @@ export default function SetEntries() {
                         type="text"
                         placeholder="Autor"
                         value={author}
-                        onChange={(e) => setAuthor(e.target.value)}
                         disabled
-                        required
                     />
 
                     <label htmlFor="entry">Eintrag</label>

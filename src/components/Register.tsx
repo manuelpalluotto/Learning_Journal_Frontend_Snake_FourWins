@@ -3,7 +3,6 @@
 import '@/css/register.css';
 import { addUser } from "@/lib/api/apiMethods";
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
 import { stringify } from "querystring";
 import { useState } from "react";
 
@@ -90,7 +89,7 @@ export default function Register() {
                         required
                     />
 
-                    <button type="submit" className="login-button"><Link href='/login'>Registrieren</Link></button>
+                    <button type="submit" className="register--login-button"><Link href='/login'>Registrieren</Link></button>
                     <p className="login-link">
                     Schon ein Konto? <a href="/login">Einloggen</a>
                 </p>

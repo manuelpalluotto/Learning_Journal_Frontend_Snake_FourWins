@@ -47,7 +47,7 @@ input:focus {
 }
 
 /* Login-Button */
-.login-button {
+.register--login-button {
     width: 100%;
     background: #667eea;
     color: white;
@@ -59,7 +59,7 @@ input:focus {
     transition: background 0.3s ease;
 }
 
-.login-button:hover {
+.register--login-button:hover {
     background: #5a67d8;
 }
 

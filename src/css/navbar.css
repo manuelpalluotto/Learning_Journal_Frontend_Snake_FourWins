@@ -42,9 +42,13 @@
 .options--button-container {
     display: flex;
     gap: 1rem;
+    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-.nav-button, .login-button {
+.nav-button, .navbar--login-button {
     background: white;
     color: black;
     padding: 0.5rem 1rem;
@@ -54,7 +58,7 @@
     transition: 0.3s;
 }
 
-.nav-button:hover, .login-button:hover {
+.nav-button:hover, .navbar--login-button:hover {
     background: #ff5555;
     color: white;
 }

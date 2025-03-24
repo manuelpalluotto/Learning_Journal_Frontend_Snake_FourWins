@@ -25,7 +25,7 @@ export default function Navbar({ toggleSidenav }: { toggleSidenav: () => void })
                 <Link href='/postEntries' className='nav-button'>Eintrag erstellen</Link>
             </div>
             <div className='login-area'>
-                {isLoggedIn ? (<Link href='/logout' className='login-button'>Logout</Link>) : (<Link href='/' className='login-button'>Login</Link>)}
+                {isLoggedIn ? (<Link href='/logout' className='navbar--login-button'>Logout</Link>) : (<Link href='/' className='login-button'>Login</Link>)}
             </div>
         </nav>
     );

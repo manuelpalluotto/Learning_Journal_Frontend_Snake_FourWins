@@ -12,12 +12,22 @@ export default function Logout() {
     const router = useRouter();
     const {  setLoggedIn, isLoading, setIsLoading } = useUser();
 
+
+    const router = useRouter();
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            router.push('/login');
+        }, 3000); // Redirect after 3 seconds
+
+        return () => clearTimeout(timer); // Cleanup the timer on component unmount
+    }, []);
     try {
         const logoutUser = async () => {
             await logout();
             setLoggedIn(false);
-        }
-        logoutUser();
+            logoutUser();
+        }; 
     } catch (error) {
         console.error(error);
     }
