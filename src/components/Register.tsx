@@ -3,6 +3,7 @@
 import '@/css/register.css';
 import { addUser } from "@/lib/api/apiMethods";
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { stringify } from "querystring";
 import { useState } from "react";
 

@@ -13,7 +13,6 @@ export default function Logout() {
     const {  setLoggedIn, isLoading, setIsLoading } = useUser();
 
 
-    const router = useRouter();
 
     useEffect(() => {
         const timer = setTimeout(() => {
