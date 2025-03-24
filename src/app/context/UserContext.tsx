@@ -17,6 +17,7 @@ interface UserContextType {
     loginUser: (username: string, password: string) => Promise<void>;
     getCurrentUser: () => User | undefined;
     isLoading: boolean;
+    setIsLoading: (loading: boolean) => void;
 }
 
 //context erstellen - speicherort für daten
@@ -120,7 +121,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
     }
 
     return (
-        <UserContext.Provider value={{ users, getUser, isLoggedIn, setLoggedIn, loginUser, getCurrentUser, isLoading }}>
+        <UserContext.Provider value={{ users, getUser, isLoggedIn, setLoggedIn, loginUser, getCurrentUser, isLoading, setIsLoading }}>
             {children}
         </UserContext.Provider>
     );

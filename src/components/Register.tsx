@@ -2,6 +2,8 @@
 
 import '@/css/register.css';
 import { addUser } from "@/lib/api/apiMethods";
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { stringify } from "querystring";
 import { useState } from "react";
 
@@ -20,7 +22,7 @@ export default function Register() {
     const [password, setPassword] = useState<string>('');
     const [email, setEmail] = useState<string>('');
     const [classroom, setClassroom] = useState<string>('');
-    
+    const router = useRouter();
 
     const handleRegister = async () => {
         const userData: UserRegistrationData = {
@@ -37,6 +39,7 @@ export default function Register() {
     
             if (response && response.email) {  
                 alert("Registrierung erfolgreich! Überprüfe deine E-Mail für die Bestätigung.");
+                router.push("/login");
             } 
         } catch (error: any) {
             console.error(error);
@@ -87,7 +90,7 @@ export default function Register() {
                         required
                     />
 
-                    <button type="submit" className="login-button">Registrieren</button>
+                    <button type="submit" className="login-button"><Link href='/login'>Registrieren</Link></button>
                     <p className="login-link">
                     Schon ein Konto? <a href="/login">Einloggen</a>
                 </p>

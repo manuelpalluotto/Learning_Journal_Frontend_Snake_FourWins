@@ -62,6 +62,7 @@ export default function SetEntries() {
                         placeholder="Autor"
                         value={author}
                         onChange={(e) => setAuthor(e.target.value)}
+                        disabled
                         required
                     />
 

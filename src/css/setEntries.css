@@ -50,6 +50,7 @@ input, textarea {
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
+    color: var(--ytBackground);
     transition: border 0.3s ease;
 }
 

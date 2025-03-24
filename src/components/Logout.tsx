@@ -3,10 +3,14 @@
 import { logout } from "@/lib/api/apiMethods";
 import { useUser } from "@/app/context/UserContext";
 import { useState } from "react";
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
 
 export default function Logout() {
 
-    const {  setLoggedIn } = useUser();
+
+    const router = useRouter();
+    const {  setLoggedIn, isLoading, setIsLoading } = useUser();
 
     try {
         const logoutUser = async () => {
@@ -14,11 +18,22 @@ export default function Logout() {
             setLoggedIn(false);
         }
         logoutUser();
+    } catch (error) {
+        console.error(error);
     }
 
-    return(
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            router.push("/login");
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
+
+    return (
         <div>
-            
+            <h1>Logging out...</h1>
         </div>
     );
 
