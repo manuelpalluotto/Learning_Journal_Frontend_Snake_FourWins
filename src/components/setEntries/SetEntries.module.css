@@ -1,19 +1,5 @@
-/* Allgemeines Styling */
-* {
-    box-sizing: border-box;
-}
 
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
 
-/* Container für das Formular */
 .form-container {
     background: white;
     padding: 2rem;
@@ -24,26 +10,24 @@ body {
     text-align: center;
 }
 
-/* Formularfeldset */
-fieldset {
+.fieldset {
     border: none;
     padding: 0;
 }
 
-legend {
+.legend {
     font-size: 1.5rem;
     font-weight: bold;
     margin-bottom: 1rem;
 }
 
-/* Eingabefelder */
-label {
+.label {
     display: block;
     font-weight: bold;
     margin: 0.5rem 0 0.2rem;
 }
 
-input, textarea {
+.input, .textarea {
     width: 100%;
     padding: 12px;
     margin-bottom: 10px;
@@ -54,12 +38,11 @@ input, textarea {
     transition: border 0.3s ease;
 }
 
-input:focus, textarea:focus {
+.input:focus, .textarea:focus {
     border-color: #667eea;
     outline: none;
 }
 
-/* Speichern-Button */
 .form-button-container {
     text-align: center;
     margin-top: 1rem;

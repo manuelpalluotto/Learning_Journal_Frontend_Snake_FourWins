@@ -1,8 +1,6 @@
 'use client';
-import '@/css/snake.css';
-import { useRef, useState, useEffect } from "react";
-import Navbar from './Navbar';
-import Sidenav from './Sidenav';
+import styles from './Snake.module.css';
+import { useEffect, useRef, useState } from "react";
 
 
 export default function Snake() {
@@ -164,11 +162,11 @@ export default function Snake() {
 
     return (
         <>
-            <div className='body-container'>
-                <div className='game-container'>
-                    <div className='score-container'>
-                        <span className='score'>Score: {score}</span>
-                        <span className='highscore'>Highscore: {highScore}</span>
+            <div className={styles['body-container']}>
+                <div className={styles['game-container']}>
+                    <div className={styles['score-container']}>
+                        <span className={styles.score}>Score: {score}</span>
+                        <span className={styles.highscore}>Highscore: {highScore}</span>
                     </div>
                     <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight}></canvas>
                 </div>

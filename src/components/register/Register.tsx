@@ -1,6 +1,6 @@
 'use client';
 
-import '@/css/register.css';
+import styles from './Register.module.css';
 import { addUser } from "@/lib/api/apiMethods";
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
@@ -55,16 +55,16 @@ export default function Register() {
     //!noch eine db entity anlegen!
 
     return (
-        <main className="register-container">
+        <main className={styles['register-container']}>
 
 
 
-            <section className="register-card">
+            <section className={styles['register-card']}>
 
 
-                <h1>Registrieren</h1>
+                <h1 className={styles.h1}>Registrieren</h1>
                 <form onSubmit={(e) => { e.preventDefault(); handleRegister(); }}>
-                    <input className='username-input'
+                    <input className={styles['username-input']}
                         id="username"
                         type="text"
                         placeholder="Benutzername"
@@ -73,7 +73,7 @@ export default function Register() {
                         required
                     />
 
-                    <input className='password-input'
+                    <input className={styles['password-input']}
                         id="password"
                         type="password"
                         placeholder="Passwort"
@@ -81,7 +81,7 @@ export default function Register() {
                         onChange={(e) => setPassword(e.target.value)}
                         required
                     />
-                    <input className='email-input'
+                    <input className={styles['email-input']}
                         id="email"
                         type="email"
                         placeholder="E-Mail"
@@ -90,8 +90,8 @@ export default function Register() {
                         required
                     />
 
-                    <button type="submit" className="register--login-button"><Link href='/login'>Registrieren</Link></button>
-                    <p className="login-link">
+                    <button type="submit" className={styles['register--login-button']}><Link href='/login'>Registrieren</Link></button>
+                    <p className={styles['login-link']}>
                     Schon ein Konto? <a href="/login">Einloggen</a>
                 </p>
                 </form>

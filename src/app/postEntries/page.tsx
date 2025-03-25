@@ -1,10 +1,10 @@
 'use client';
 
+import Navbar from "@/components/navbar/Navbar";
+import ProtectedRoute from '@/components/protectedRoute/ProtectedRouter';
+import SetEntries from "@/components/setEntries/SetEntries";
+import Sidenav from "@/components/sidenav/Sidenav";
 import '@/css/entriesPage.css';
-import Navbar from "@/components/Navbar";
-import SetEntries from "@/components/SetEntries";
-import Sidenav from "@/components/Sidenav";
-import ProtectedRoute from '@/components/ProtectedRouter';
 import { useState } from 'react';
 
 

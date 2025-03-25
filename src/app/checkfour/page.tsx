@@ -1,10 +1,10 @@
 'use client';
 
-import Checkfour from "@/components/Checkfour";
-import Navbar from "@/components/Navbar";
-import Sidenav from "@/components/Sidenav";
+import Checkfour from "@/components/checkfour/Checkfour";
+import Navbar from "@/components/navbar/Navbar";
+import ProtectedRoute from "@/components/protectedRoute/ProtectedRouter";
+import Sidenav from "@/components/sidenav/Sidenav";
 import { useState } from "react";
-import ProtectedRoute from "@/components/ProtectedRouter";
 
 export default function CheckfourPage() {
 

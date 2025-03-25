@@ -1,6 +1,6 @@
 'use client';
 
-import '@/css/setEntries.css';
+import styles from './SetEntries.module.css';
 import { useUser } from '@/app/context/UserContext';
 import { addEntry } from '@/lib/api/apiMethods';
 import { JournalEntry } from '@/lib/api/apiClient';
@@ -50,32 +50,30 @@ export default function SetEntries() {
     };
 
     return (
-        <div className="form-container">
-            <form onSubmit={handleSubmit} className="entry-form">
-                <fieldset>
-                    <legend>Neuer Eintrag</legend>
-                    <label htmlFor="author">Autor</label>
-                    <input 
+        <div className={styles['form-container']}>
+            <form onSubmit={handleSubmit} className={styles['entry-form']}>
+                <fieldset className={styles.fieldset}>
+                    <legend className={styles.legend}>Neuer Eintrag</legend>
+                    <label className={styles.label} htmlFor="author">Autor</label>
+                    <input className={styles.input}
                         id="author"
-                        className="author-field"
                         type="text"
                         placeholder="Autor"
                         value={author}
                         disabled
                     />
 
-                    <label htmlFor="entry">Eintrag</label>
-                    <textarea 
+                    <label className={styles.label} htmlFor="entry">Eintrag</label>
+                    <textarea className={styles.textarea}
                         id="entry"
-                        className="entry-input"
                         placeholder="Dein Eintrag..."
                         value={entry}
                         onChange={(e) => setEntry(e.target.value)}
                         required
                     />
 
-                    <div className="form-button-container">
-                        <button type="submit" className="submit-button">Speichern</button>
+                    <div className={styles['form-button-container']}>
+                        <button type="submit" className={styles['submit-button']}>Speichern</button>
                     </div>
                 </fieldset>
             </form>

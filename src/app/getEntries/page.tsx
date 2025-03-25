@@ -1,10 +1,9 @@
 'use client';
 
-import FetchEntries from '@/components/FetchEntries';
-import Navbar from '@/components/Navbar';
-import ProtectedRoute from '@/components/ProtectedRouter';
-import Sidenav from '@/components/Sidenav';
-import '@/css/getEntries.css';
+import FetchEntries from '@/components/fetchEntries/FetchEntries';
+import Navbar from '@/components/navbar/Navbar';
+import ProtectedRoute from '@/components/protectedRoute/ProtectedRouter';
+import Sidenav from '@/components/sidenav/Sidenav';
 import { useState } from 'react';
 
 

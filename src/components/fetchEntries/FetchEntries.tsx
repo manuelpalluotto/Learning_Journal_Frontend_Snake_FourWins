@@ -1,10 +1,10 @@
 'use client';
 
-import { EntryItem } from './EntryItem';
-import '@/css/getEntries.css';
-import { fetchEntries } from '@/lib/api/apiMethods';
+import styles from './FetchEntries.module.css';
 import { JournalEntry } from '@/lib/api/apiClient';
-import { useState, useEffect } from 'react';
+import { fetchEntries } from '@/lib/api/apiMethods';
+import { useEffect, useState } from 'react';
+import { EntryItem } from '../entryItem/EntryItem';
 
 
 export default function FetchEntries() {
@@ -31,10 +31,10 @@ export default function FetchEntries() {
     }, []);
 
     return (
-        <div className="entries-container">
-            {loading && <p className="loading-message">Lädt...</p>}
-            {error && <p className="error-message">{error}</p>}
-            {!loading && entries.length === 0 && <p className="no-entries">Keine Einträge vorhanden.</p>}
+        <div className={styles['entries-container']}>
+            {loading && <p className={styles['loading-message']}>Lädt...</p>}
+            {error && <p className={styles['error-message']}>{error}</p>}
+            {!loading && entries.length === 0 && <p className={styles['no-entries']}>Keine Einträge vorhanden.</p>}
 
             {/* Map über alle Einträge und rendere für jeden das EntryItem */}
             {entries.map((entry) => (

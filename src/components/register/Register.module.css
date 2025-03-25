@@ -1,12 +1,4 @@
-body {
-    font-family: 'Inter', sans-serif;
-    background: linear-gradient(135deg, #667eea, #764ba2);
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 0;
-}
+
 
 .register-container {
     display: flex;
@@ -25,28 +17,13 @@ body {
     width: 100%;
 }
 
-h1 {
+.h1 {
     margin-bottom: 1rem;
     color: #333;
 }
 
-/* Eingabefelder */
-input {
-    width: 100%;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border 0.3s ease;
-}
 
-input:focus {
-    border-color: #667eea;
-    outline: none;
-}
 
-/* Login-Button */
 .register--login-button {
     width: 100%;
     background: #667eea;
@@ -63,7 +40,6 @@ input:focus {
     background: #5a67d8;
 }
 
-/* Fehlermeldung */
 .error-message {
     color: red;
     font-size: 0.9rem;

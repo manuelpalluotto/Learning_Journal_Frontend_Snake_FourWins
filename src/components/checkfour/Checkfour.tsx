@@ -1,4 +1,4 @@
-import '@/css/checkfour.css';
+import styles from './Checkfour.module.css';
 import { useState, useRef, useEffect } from 'react';
 import { FaArrowDown } from "react-icons/fa";
 
@@ -93,12 +93,12 @@ export default function Checkfour() {
 
     return (
         <>
-            <div className='game-board'>
+            <div className={styles['game-board']}>
 
-                <div className='game-info'>
-                    <div className='player-turn'>{player}`s turn!</div>
+                <div className={styles['game-info']}>
+                    <div className={styles['player-turn']}>{player}`s turn!</div>
                 </div>
-                <div className='indicator' style={{ transform: `translateX(${selectedCol * tilesize}px)` }}>
+                <div className={styles.idicator} style={{ transform: `translateX(${selectedCol * tilesize}px)` }}>
                     <FaArrowDown />
                 </div>
                 <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight}></canvas>

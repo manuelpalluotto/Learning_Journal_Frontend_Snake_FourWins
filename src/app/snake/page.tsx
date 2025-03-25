@@ -1,9 +1,9 @@
 'use client';
 
-import Snake from "@/components/Snake";
-import ProtectedRoute from "@/components/ProtectedRouter";
-import Sidenav from "@/components/Sidenav";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
+import ProtectedRoute from "@/components/protectedRoute/ProtectedRouter";
+import Sidenav from "@/components/sidenav/Sidenav";
+import Snake from "@/components/snake/Snake";
 import { useState } from "react";
 
 
