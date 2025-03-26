@@ -7,13 +7,15 @@ import Sidenav from "../sidenav/Sidenav";
 import { ticTacToeBoardDescription } from '../description';
 import ProtectedRoute from '../protectedRoute/ProtectedRouter';
 
+interface imageInfoObj {
+    src: string,
+    name: string,
+    description: string,
+};
+
+
 export default function Infocard() {
 
-    interface imageInfoObj {
-        src: string,
-        name: string,
-        description: string,
-    };
 
     const ticTacToeBoard: imageInfoObj = {
         src: '/images/TicTacToeBoard.png',
@@ -38,13 +40,6 @@ export default function Infocard() {
         name: 'Visualization of my programmed Tic Tac Toe Board',
         description: ticTacToeBoardDescription,
     };
-
-    const ticTacToeData: imageInfoObj[] = [
-        { src: ticTacToeBoard.src, name: ticTacToeBoard.name, description: ticTacToeBoard.description },
-        { src: ticTacToeCodeFull.src, name: ticTacToeCodeFull.name, description: ticTacToeCodeFull.description },
-        { src: ticTacToeTieDialog.src, name: ticTacToeTieDialog.name, description: ticTacToeTieDialog.description },
-        { src: ticTacToeWinDialog.src, name: ticTacToeWinDialog.name, description: ticTacToeWinDialog.description },
-    ];
 
     const structureNpe: imageInfoObj = {
         src: '/images/StructureNpe.png',
@@ -82,94 +77,106 @@ export default function Infocard() {
     ];
 
     const [isSidenavOpen, setIsSidenavOpen] = useState<boolean>(false);
+
+
     const [ticExpanded, setTicExpanded] = useState<boolean>(false);
     const [npeExpanded, setNpeExpanded] = useState<boolean>(false);
     const [springExpanded, setSpringExpanded] = useState<boolean>(false);
 
+
     return (
 
         <ProtectedRoute>
-        <div className={styles.body}>
-            <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
-            <Sidenav isOpen={isSidenavOpen} />
+            <div className={styles.body}>
+                <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
+                <Sidenav isOpen={isSidenavOpen} />
+                <div className={styles['body-minus-header']}>
+                    <div className={styles['title-field']}>
+                        <h1 className={styles.h1}>Willkommen!</h1>
+                        <p className={styles.p}>Hier finden Sie eine kleine Übersicht über meine bisherigen Projekte. </p>
+                    </div>
+                    <div className={styles.overallContainer}>
 
 
 
-            <div className={styles['below-navbar']}>
+
+                        
+                        <div className={styles.topicContainerTTT}>
+                            <div className={styles.topicTitle}>Tic Tac Toe</div>
+                            <div className={styles.tttCardContainer}>
+                                <div className={styles.imageDescriptionWrapper}>
+                                    <div className={styles.imageContainer}>
+                                        <Image className={styles.ticTacToeBoardImage} src={ticTacToeCodeFull.src} alt={ticTacToeCodeFull.name} width={400} height={200}></Image>
+                                    </div>
+                                    <div className={styles.imageDescription}>{ticTacToeCodeFull.description}</div>
+                                </div>
+                                <div className={styles.imageDescriptionWrapper}>
+                                    <div className={styles.imageContainer}>
+                                        <Image className={styles.ticTacToeBoardImage} src={ticTacToeBoard.src} alt={ticTacToeBoard.name} width={400} height={200}></Image>
+                                    </div>
+                                    <div className={styles.imageDescription}>{ticTacToeBoard.description}</div>
+                                </div>
+                                <div className={styles.imageDescriptionWrapper}>
+                                    <div className={styles.imageContainer}>
+                                        <Image className={styles.ticTacToeBoardImage} src={ticTacToeTieDialog.src} alt={ticTacToeTieDialog.name} width={400} height={200}></Image>
+                                    </div>
+                                    <div className={styles.imageDescription}>{ticTacToeTieDialog.description}</div>
+                                </div>
+                                <div className={styles.imageDescriptionWrapper}>
+                                    <div className={styles.imageContainer}>
+                                        <Image className={styles.ticTacToeBoardImage} src={ticTacToeWinDialog.src} alt={ticTacToeWinDialog.name} width={400} height={200}></Image>
+                                    </div>
+                                    <div className={styles.imageDescription}>{ticTacToeWinDialog.description}</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div className={styles.topicContainerNpe}>
 
 
 
-                <div className={styles['projects-overview']}>
-                    <h1 className={styles.h1}>Willkommen!</h1>
-                    <p>Hier finden Sie eine kleine Übersicht über meine bisherigen Projekte. </p>
+                            <div className={styles.topicTitle}>Netzplanerstellung</div>
+
+
+
+                            <div className={styles.npeCardContainer}>
+
+
+
+                                <div className={styles.imageDescriptionWrapper}>
+                                    <div className={styles.imageContainer}>
+                                        <Image className={styles.npeImage} src={structureNpe.src} alt={structureNpe.name} width={400} height={200} ></Image>
+                                    </div>
+                                    <div className={styles.imageDescription}>{structureNpe.description}</div>
+                                </div>
+
+
+
+                                <div className={styles.imageDescriptionWrapper}>
+                                    <div className={styles.imageContainer}>
+                                        <Image className={styles.npeImage} src={npeCodeFull.src} alt={npeCodeFull.name} width={400} height={200} ></Image>
+                                    </div>
+                                    <div className={styles.imageDescription}>{npeCodeFull.description}</div>
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+
+                        </div>
+
+
+
+
+                    </div>
                 </div>
-
-
-
-                <div className={styles['content-field']}>
-
-
-
-                <div className={`${styles.container} ${ticExpanded ? styles.expanded : styles.collapsed}`}>
-                {!ticExpanded && <h2 className={styles.title}>Tic Tac Toe</h2>} 
-                        <div className={`${styles["ticTacToe-card"]} ${ticExpanded ? styles.expanded : ""}`} onClick={() => setTicExpanded(!ticExpanded)}>
-                            <div className={`${styles["imageContainer"]} ${ticExpanded ? styles.expanded : ""}`}>
-                                {ticTacToeData.map((item, index) => (
-                                    <div key={index} className={styles['image-wrapper']}>
-                                        <Image className={styles.image} src={item.src} alt={item.name} width={500} height={300} />
-                                        {ticExpanded && (
-                                            <div className={styles.description}>{item.description}</div>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div className={styles.container}>
-                        {!springExpanded && <h2 className={styles.title}>Tic Tac Toe</h2>}
-                        <div className={`${styles["springboot-card"]} ${springExpanded ? styles.expanded : ""}`} onClick={() => setSpringExpanded(!springExpanded)}>
-                            <div className={styles.imageContainer}>
-                                {springBootData.map((item, index) => (
-                                    <div key={index} className={styles['image-wrapper']}>
-                                        <Image className={styles.image} src={item.src} alt={item.name} width={500} height={300} />
-                                        {springExpanded && (
-                                            <p className={styles.description}>{item.description}</p>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                    <div className={styles.container}>
-                        {!npeExpanded && <h2 className={styles.title}>Tic Tac Toe</h2>}
-                        <div className={`${styles["npe-card"]} ${npeExpanded ? styles.expanded : ""}`} onClick={() => setNpeExpanded(!npeExpanded)}>
-                            <div className={styles.imageContainer}>
-                                {npeData.map((item, index) => (
-                                    <div key={index} className={styles['image-wrapper']}>
-                                        <Image className={styles.image} src={item.src} alt={item.name} width={500} height={300} />
-                                        {npeExpanded && (
-                                            <p className={styles.description}>{item.description}</p>
-                                        )}
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-
-
-
-                </div>
-
-
-
             </div>
-        </div>
         </ProtectedRoute>
     );
 }
