@@ -10,8 +10,20 @@ export default function Logout() {
 
 
     const router = useRouter();
-    const {  setLoggedIn, isLoading, setIsLoading } = useUser();
+    const { setLoggedIn, isLoading, setIsLoading } = useUser();
+    const logoutUser = async () => {
+        await logout();
+        setLoggedIn(false);
+    };
 
+    useEffect(() => {
+        logoutUser();
+        const timer = setTimeout(() => {
+            router.push("/login");
+        }, 1000);
+
+        return () => clearTimeout(timer);
+    }, []);
 
 
     useEffect(() => {
@@ -21,23 +33,8 @@ export default function Logout() {
 
         return () => clearTimeout(timer); // Cleanup the timer on component unmount
     }, []);
-    try {
-        const logoutUser = async () => {
-            await logout();
-            setLoggedIn(false);
-            logoutUser();
-        }; 
-    } catch (error) {
-        console.error(error);
-    }
 
-    useEffect(() => {
-        const timer = setTimeout(() => {
-            router.push("/login");
-        }, 1000);
-
-        return () => clearTimeout(timer);
-    }, []);
+    
 
 
     return (

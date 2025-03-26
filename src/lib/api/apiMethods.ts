@@ -36,5 +36,7 @@ export async function addUser(user: Omit<User, 'id'>): Promise<User> {
 }
 
 export async function logout() {
+    const response = await apiClient.post('/logout');
     localStorage.removeItem('token');
+    return response.data;
 }

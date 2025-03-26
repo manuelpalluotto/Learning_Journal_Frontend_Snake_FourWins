@@ -21,6 +21,8 @@ export default function Sidenav({ isOpen }: { isOpen: boolean }) {
             <Link href='/'><FaHome /> Home</Link>
             <Link href='/snake'><VscSnake /> Snake</Link>
             <Link href='/checkfour'><FaChessBoard /> Vier Gewinnt</Link>
+            <Link href='/getEntries' className={styles['nav-button']}>Einträge anzeigen</Link>
+            <Link href='/postEntries' className={styles['nav-button']}>Eintrag erstellen</Link>
         </aside>
     );
 } 

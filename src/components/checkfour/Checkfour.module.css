@@ -3,27 +3,32 @@
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    border: 1px solid var(--youtubeRed);
     display: flex;
     flex-direction: column;
     margin: 0 auto;
+    background-color: var(--youtubeBackGray);
+    border: 5px solid black;
+    box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
 }
 
 .game-info {
     display: flex;
     align-items: center;
     justify-content: center;
-    border-bottom: 1px solid var(--youtubeRed);
 
 }
 
 .player-turn {
-    color:var(--youtubeFont);
+    color: var(--youtubeFont);
     font-weight: 1000;
+    padding: 0.5rem;
 }
 
 .indicator {
     margin-left: 15px;
-    padding: 10px;
     transition: transform 0.2s ease-in-out;
+}
+
+.arrow {
+    color: white;
 }

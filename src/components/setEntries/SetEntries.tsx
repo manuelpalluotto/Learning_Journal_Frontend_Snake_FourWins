@@ -50,6 +50,7 @@ export default function SetEntries() {
     };
 
     return (
+        <div className={styles.allContainer}>
         <div className={styles['form-container']}>
             <form onSubmit={handleSubmit} className={styles['entry-form']}>
                 <fieldset className={styles.fieldset}>
@@ -77,6 +78,7 @@ export default function SetEntries() {
                     </div>
                 </fieldset>
             </form>
+        </div>
         </div>
     );
 }

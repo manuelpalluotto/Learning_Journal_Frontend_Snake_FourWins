@@ -28,7 +28,6 @@ export default function Login() {
             <section className="login-card">
                 <h1>Anmelden</h1>
                 <form onSubmit={(e) => { e.preventDefault(); handleLogin(); }}>
-                    <label htmlFor="username">Benutzername</label>
                     <input
                         id="username"
                         type="text"
@@ -38,7 +37,6 @@ export default function Login() {
                         required
                     />
 
-                    <label htmlFor="password">Passwort</label>
                     <input
                         id="password"
                         type="password"

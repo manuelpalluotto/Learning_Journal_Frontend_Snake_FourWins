@@ -99,7 +99,7 @@ export default function Checkfour() {
                     <div className={styles['player-turn']}>{player}`s turn!</div>
                 </div>
                 <div className={styles.idicator} style={{ transform: `translateX(${selectedCol * tilesize}px)` }}>
-                    <FaArrowDown />
+                    <FaArrowDown className={styles.arrow}/>
                 </div>
                 <canvas ref={canvasRef} width={canvasWidth} height={canvasHeight}></canvas>
             </div>
