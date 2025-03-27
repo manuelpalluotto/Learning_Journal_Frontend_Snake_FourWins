@@ -1,5 +1,5 @@
 .body-minus-header {
-    box-sizing: border-box;    
+    box-sizing: border-box;
     height: 100%;
     width: 100%;
     text-align: center;
@@ -41,13 +41,30 @@
 /* .topicTitle {} */
 
 .tttCardContainer {
+    border: 5px solid green;
     display: flex;
     flex-direction: row;
     gap: 1rem;
+    cursor: pointer;
+    transform: translateX(0) scale(1);
+    transition: transform 0.5s ease-in-out;
 }
 
-/* .imageDecsriptionWrapper {} */
 
+
+.tttCardContainer.expanded {
+    transform: translateX(500px) scale(1.5);
+    transition: transform 0.5s ease-in-out;
+    /* Dauer und Timing-Funktion */
+}
+
+.imageDecsriptionWrapper {
+    border: 5px solid magenta;
+
+    padding: 1rem;
+}
+
+/* das image an sich -> */
 /* .imageContainer {} */
 
 /* .ticTacToeBoardImage{} */

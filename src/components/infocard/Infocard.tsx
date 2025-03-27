@@ -83,6 +83,8 @@ export default function Infocard() {
     const [npeExpanded, setNpeExpanded] = useState<boolean>(false);
     const [springExpanded, setSpringExpanded] = useState<boolean>(false);
 
+    const tttStyle = `${styles.tttCardContainer} ${ticExpanded ? styles.expanded : ""}`;
+
 
     return (
 
@@ -102,74 +104,75 @@ export default function Infocard() {
 
                         
                         <div className={styles.topicContainerTTT}>
+
                             <div className={styles.topicTitle}>Tic Tac Toe</div>
-                            <div className={styles.tttCardContainer}>
-                                <div className={styles.imageDescriptionWrapper}>
+
+                            <div className={tttStyle} onClick={() => setTicExpanded(!ticExpanded)}>
+
+
+
+
+                                <div className={styles.imageDecsriptionWrapper}>
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.ticTacToeBoardImage} src={ticTacToeCodeFull.src} alt={ticTacToeCodeFull.name} width={400} height={200}></Image>
                                     </div>
                                     <div className={styles.imageDescription}>{ticTacToeCodeFull.description}</div>
                                 </div>
-                                <div className={styles.imageDescriptionWrapper}>
+
+
+
+
+                                <div className={styles.imageDecsriptionWrapper}>
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.ticTacToeBoardImage} src={ticTacToeBoard.src} alt={ticTacToeBoard.name} width={400} height={200}></Image>
                                     </div>
                                     <div className={styles.imageDescription}>{ticTacToeBoard.description}</div>
                                 </div>
-                                <div className={styles.imageDescriptionWrapper}>
+
+
+
+
+                                <div className={styles.imageDecsriptionWrapper}>
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.ticTacToeBoardImage} src={ticTacToeTieDialog.src} alt={ticTacToeTieDialog.name} width={400} height={200}></Image>
                                     </div>
                                     <div className={styles.imageDescription}>{ticTacToeTieDialog.description}</div>
                                 </div>
-                                <div className={styles.imageDescriptionWrapper}>
+
+
+
+
+                                <div className={styles.imageDecsriptionWrapper}>
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.ticTacToeBoardImage} src={ticTacToeWinDialog.src} alt={ticTacToeWinDialog.name} width={400} height={200}></Image>
                                     </div>
                                     <div className={styles.imageDescription}>{ticTacToeWinDialog.description}</div>
                                 </div>
+
+
+
+
                             </div>
                         </div>
 
 
-                        <div className={styles.topicContainerNpe}>
-
-
-
+                        {/* <div className={styles.topicContainerNpe}>
                             <div className={styles.topicTitle}>Netzplanerstellung</div>
-
-
-
                             <div className={styles.npeCardContainer}>
-
-
-
-                                <div className={styles.imageDescriptionWrapper}>
+                                <div className={styles.imageDecsriptionWrapper}>
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.npeImage} src={structureNpe.src} alt={structureNpe.name} width={400} height={200} ></Image>
                                     </div>
                                     <div className={styles.imageDescription}>{structureNpe.description}</div>
                                 </div>
-
-
-
-                                <div className={styles.imageDescriptionWrapper}>
+                                <div className={styles.imageDecsriptionWrapper}>
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.npeImage} src={npeCodeFull.src} alt={npeCodeFull.name} width={400} height={200} ></Image>
                                     </div>
                                     <div className={styles.imageDescription}>{npeCodeFull.description}</div>
                                 </div>
-
-
-
                             </div>
-
-
-
-
-
-
-                        </div>
+                        </div> */}
 
 
 
