@@ -1,6 +1,5 @@
 .entries-container {
-
-    margin: 10rem auto;
+    margin: auto;
     width: 100%;
     max-width: 600px;
     background: white;
@@ -66,4 +65,12 @@
 
 .entry-card:last-child {
     border-bottom: none;
+}
+
+.sortedContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: fit-content;
 }

@@ -3,11 +3,11 @@ import '@/css/getEntries.css';
 import { useState } from "react";
 import { editEntry } from "@/lib/api/apiMethods";
 
-
 export const EntryItem = ({ entry }: { entry: JournalEntry }) => {
 
     const [updatedEntry, setUpdatedEntry] = useState<string>(entry.entry);
     const [editing, setEditing] = useState<boolean>(false);
+
 
     const reloadPage = () => {
         window.location.href = window.location.href;
@@ -33,10 +33,9 @@ export const EntryItem = ({ entry }: { entry: JournalEntry }) => {
         }
     };
 
-    // Umwandlung des timestamp (falls es sich um Millisekunden handelt) in ein Date-Objekt
     const timestamp = typeof entry.timestamp === 'string' && !isNaN(Number(entry.timestamp))
-        ? new Date(Number(entry.timestamp))  // Falls der timestamp eine Zahl ist
-        : new Date(entry.timestamp);  // Falls der timestamp ein ISO-String ist
+        ? new Date(Number(entry.timestamp))  
+        : new Date(entry.timestamp); 
 
     const formattedTimestamp = timestamp.toLocaleString('de-DE', {
         weekday: 'short',
