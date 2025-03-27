@@ -6,13 +6,16 @@ export async function login(username: string, password: string): Promise<string>
     const response = await apiClient.post<{ token: string }>(
         '/login', { username, password }
     );
-
     const token = response.data.token;
-
     localStorage.setItem('token', token);
-
     return token;
 }
+
+export async function editEntry(entry: JournalEntry): Promise<JournalEntry> {
+    const response = await apiClient.put<JournalEntry>('/entries', entry);
+    return response.data;
+}
+
 
 export async function fetchEntries(): Promise<JournalEntry[]> {
     const response = await apiClient.get<JournalEntry[]>('/entries');
@@ -40,3 +43,4 @@ export async function logout() {
     localStorage.removeItem('token');
     return response.data;
 }
+

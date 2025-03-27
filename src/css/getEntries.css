@@ -66,3 +66,16 @@
 .entry-card:last-child {
     border-bottom: none;
 }
+
+.edit-button {
+    font-size: 0.8rem;;
+    color: rgb(8, 8, 175);
+    background: none;
+    border: none;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.edit-button:hover {
+    text-decoration: underline;
+}
