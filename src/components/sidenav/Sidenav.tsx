@@ -10,19 +10,17 @@ import { useState } from 'react';
 
 export default function Sidenav({ isOpen }: { isOpen: boolean }) {
 
-    console.log('styles:', styles);
-    console.log('Sidenav is open:', isOpen);
-    console.log('Classname:', `${styles['sidenav-container']} ${isOpen ? styles.open : ''}`);
-
-    console.log('Sidenav is open: ', isOpen);
+    
 
     return (
-        <aside className={`${styles['sidenav-container']} ${isOpen ? styles.open : ''}`}>
-            <Link href='/'><FaHome /> Home</Link>
-            <Link href='/snake'><VscSnake /> Snake</Link>
-            <Link href='/checkfour'><FaChessBoard /> Vier Gewinnt</Link>
-            <Link href='/getEntries' className={styles['nav-button']}>Einträge anzeigen</Link>
-            <Link href='/postEntries' className={styles['nav-button']}>Eintrag erstellen</Link>
-        </aside>
+        <div onClick={() => }>
+            <aside className={`${styles['sidenav-container']} ${isOpen ? styles.open : ''}`}>
+                <Link href='/'><FaHome /> Home</Link>
+                <Link href='/snake'><VscSnake /> Snake</Link>
+                <Link href='/checkfour'><FaChessBoard /> Vier Gewinnt</Link>
+                <Link href='/getEntries' className={styles['nav-button']}>Einträge anzeigen</Link>
+                <Link href='/postEntries' className={styles['nav-button']}>Eintrag erstellen</Link>
+            </aside>
+        </div>
     );
 } 

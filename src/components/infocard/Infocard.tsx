@@ -104,12 +104,13 @@ export default function Infocard() {
 
                         <div className={styles.topicContainerTTT}>
 
+                            {!ticExpanded &&
                             <div className={styles.topicTitle}>
                                 <span className={styles.tttTitleOne}>Tic</span>
                                 <span className={styles.tttTitleTwo}>Tac</span>
                                 <span className={styles.tttTitleThree}>Toe</span>
                             </div>
-
+                            }
                             {/* grün  */}<div className={tttStyle} onClick={() => setTicExpanded(!ticExpanded)}>
 
 
@@ -121,9 +122,9 @@ export default function Infocard() {
                                     </div>
 
                                     {ticExpanded &&
-                                    <div className={styles.imageDescription}>{ticTacToeCodeFull.description}</div>
+                                        <div className={styles.imageDescription}>{ticTacToeCodeFull.description}</div>
                                     }
-                                    </div>
+                                </div>
 
 
 
@@ -132,7 +133,9 @@ export default function Infocard() {
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.ticTacToeBoardImage} src={ticTacToeBoard.src} alt={ticTacToeBoard.name} width={400} height={200}></Image>
                                     </div>
-                                    <div className={styles.imageDescription}>{ticTacToeBoard.description}</div>
+                                    {ticExpanded && 
+                                        <div className={styles.imageDescription}>{ticTacToeBoard.description}</div>
+                                    }
                                 </div>
 
 
@@ -142,7 +145,9 @@ export default function Infocard() {
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.ticTacToeBoardImage} src={ticTacToeTieDialog.src} alt={ticTacToeTieDialog.name} width={400} height={200}></Image>
                                     </div>
-                                    <div className={styles.imageDescription}>{ticTacToeTieDialog.description}</div>
+                                    {ticExpanded && 
+                                        <div className={styles.imageDescription}>{ticTacToeTieDialog.description}</div>
+                                    }
                                 </div>
 
 
@@ -152,7 +157,9 @@ export default function Infocard() {
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.ticTacToeBoardImage} src={ticTacToeWinDialog.src} alt={ticTacToeWinDialog.name} width={400} height={200}></Image>
                                     </div>
-                                    <div className={styles.imageDescription}>{ticTacToeWinDialog.description}</div>
+                                    {ticExpanded && 
+                                        <div className={styles.imageDescription}>{ticTacToeWinDialog.description}</div>
+                                    }
                                 </div>
 
 
