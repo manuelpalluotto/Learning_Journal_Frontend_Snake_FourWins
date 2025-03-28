@@ -85,7 +85,6 @@ export default function Infocard() {
 
     const tttStyle = `${styles.tttCardContainer} ${ticExpanded ? styles.expanded : ""}`;
 
-
     return (
 
         <ProtectedRoute>
@@ -102,22 +101,29 @@ export default function Infocard() {
 
 
 
-                        
+
                         <div className={styles.topicContainerTTT}>
 
-                            <div className={styles.topicTitle}>Tic Tac Toe</div>
+                            <div className={styles.topicTitle}>
+                                <span className={styles.tttTitleOne}>Tic</span>
+                                <span className={styles.tttTitleTwo}>Tac</span>
+                                <span className={styles.tttTitleThree}>Toe</span>
+                            </div>
 
-                            <div className={tttStyle} onClick={() => setTicExpanded(!ticExpanded)}>
+                            {/* grün  */}<div className={tttStyle} onClick={() => setTicExpanded(!ticExpanded)}>
 
 
 
 
-                                <div className={styles.imageDecsriptionWrapper}>
+                                {/* pink  */}<div className={styles.imageDecsriptionWrapper}>
                                     <div className={styles.imageContainer}>
                                         <Image className={styles.ticTacToeBoardImage} src={ticTacToeCodeFull.src} alt={ticTacToeCodeFull.name} width={400} height={200}></Image>
                                     </div>
+
+                                    {ticExpanded &&
                                     <div className={styles.imageDescription}>{ticTacToeCodeFull.description}</div>
-                                </div>
+                                    }
+                                    </div>
 
 
 
