@@ -1,9 +1,21 @@
 import { JournalEntry } from "@/lib/api/apiClient";
-import '@/css/getEntries.css';
+import styles from '@/components/fetchEntries/FetchEntries.module.css';
 import { useState } from "react";
 import { editEntry } from "@/lib/api/apiMethods";
+import { useUser } from "@/app/context/UserContext";
 
-export const EntryItem = ({ entry }: { entry: JournalEntry }) => {
+export const EntryItem = ({
+    entry,
+    isExpanded,
+    onToggleExpand,
+}: {
+    entry: JournalEntry;
+    isExpanded: boolean;
+    onToggleExpand: () => void;
+}) => {
+
+    const { getCurrentUser } = useUser();
+    const currentUser = getCurrentUser();
 
     const [updatedEntry, setUpdatedEntry] = useState<string>(entry.entry);
     const [editing, setEditing] = useState<boolean>(false);
@@ -34,8 +46,8 @@ export const EntryItem = ({ entry }: { entry: JournalEntry }) => {
     };
 
     const timestamp = typeof entry.timestamp === 'string' && !isNaN(Number(entry.timestamp))
-        ? new Date(Number(entry.timestamp))  
-        : new Date(entry.timestamp); 
+        ? new Date(Number(entry.timestamp))
+        : new Date(entry.timestamp);
 
     const formattedTimestamp = timestamp.toLocaleString('de-DE', {
         weekday: 'short',
@@ -48,25 +60,45 @@ export const EntryItem = ({ entry }: { entry: JournalEntry }) => {
     });
 
     return (
-        <article key={entry.id} className="entry-card">
-            <div className="entry-header">
-                <h3 className="author-name">{entry.author}</h3>
-            </div>
-            {editing? 
-            <div>
-                <input 
-                className="entry-content"
-                value={updatedEntry}
-                onChange={(e) => setUpdatedEntry(e.target.value)}
+        <article key={entry.id} className={styles['entry-card']}>
+            <div className={styles['entry-header']}>
+                <h3
+                    className={styles['author-name']}
+                    onClick={(e) => {
+                        e.stopPropagation(); 
+                        onToggleExpand(); 
+                    }}
                 >
-                </input>
-                <button className="edit-button" type='submit' onClick={() => sendEdit()}>Bestätigen</button>
+                    {currentUser?.username === entry.author ? 'Deine Beiträge' : entry.author}
+                </h3>
             </div>
-             : 
-             <p className="entry-content">{entry.entry}</p>
-             }
-            <p className="entry-timestamp">{formattedTimestamp}</p> 
-            <button className="edit-button" onClick={() => setEditing(!editing)}>Bearbeiten</button>
+            {editing ? (
+                <div>
+                    <input
+                        className={styles['entry-content']}
+                        value={updatedEntry}
+                        onChange={(e) => setUpdatedEntry(e.target.value)}
+                    />
+                    <button
+                        className={styles['edit-button']}
+                        onClick={(event) => {
+                            event.stopPropagation();
+                            setEditing(!editing);
+                        }}
+                    >
+                        Bearbeiten
+                    </button>
+                </div>
+            ) : (
+                <p className={styles['entry-content']}>{entry.entry}</p>
+            )}
+            <p className={styles['entry-timestamp']}>{formattedTimestamp}</p>
+            <button
+                className={styles['edit-button']}
+                onClick={() => setEditing(!editing)}
+            >
+                Bearbeiten
+            </button>
         </article>
     );
 };

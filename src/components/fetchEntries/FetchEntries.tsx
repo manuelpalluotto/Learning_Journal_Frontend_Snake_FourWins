@@ -10,20 +10,18 @@ import { fetchUsers } from '@/lib/api/apiMethods';
 
 export default function FetchEntries() {
 
-
     const [entries, setEntries] = useState<JournalEntry[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
     const [users, setUsers] = useState<User[]>([]);
-
-    async function getUsers() {
-        try {
-
-        } catch (error) {
-            console.error(error);
-        }
-    }
+    const [expandedStates, setExpandedStates] = useState<{ [key: string]: boolean }>({});
 
 
+    const toggleExpanded = (userId: string) => {
+        setExpandedStates((prev) => ({
+            ...prev,
+            [userId]: !prev[userId], // Toggle den Zustand für den spezifischen Benutzer
+        }));
+    };
 
     const getData = async () => {
         try {
@@ -43,7 +41,7 @@ export default function FetchEntries() {
     }, []);
 
     return (
-        <>
+        <div className={styles.sortedContainer} >
             {users.map((user: User) => {
                 // Filtere die Einträge, die zu diesem Benutzer gehören
                 const sortedEntries = entries.filter((entry) => entry.userId === user.id);
@@ -51,21 +49,26 @@ export default function FetchEntries() {
                 return (
 
 
-                    <div className={styles.sortedContainer} key={user.id}>
-                        <div className={styles['entries-container']}>
-                        <h2>{user.username}</h2>
+                    <div key={user.id}>
+                        <div
+                            className={`${styles['entries-container']} ${expandedStates[user.id] ? styles.expanded : ''}`}>
                             {sortedEntries.length === 0 ? (
                                 <p className={styles['no-entries']}>Keine Einträge vorhanden.</p>
                             ) : (
-                                sortedEntries.map((entry) => (
-                                    <EntryItem key={entry.id} entry={entry} />
-                                ))
+                                    sortedEntries.map((entry) => (
+                                        <EntryItem 
+                                        key={entry.id} 
+                                        entry={entry} 
+                                        isExpanded={expandedStates[user.id]}
+                                        onToggleExpand={() => toggleExpanded(user.id)}
+                                        />
+                                    ))
                             )}
                         </div>
                     </div>
                 );
             })}
-        </>
+        </div>
     );
 }
 

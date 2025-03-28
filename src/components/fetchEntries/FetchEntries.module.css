@@ -1,11 +1,20 @@
 .entries-container {
     margin: auto;
-    width: 100%;
+    height: 200px;
     max-width: 600px;
     background: white;
     padding: 1.5rem;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    transition: height 0.3s ease;
+}
+
+.entries-container.expanded {
+    height: 800px; 
+    overflow-y: auto;
 }
 
 .loading-message,
@@ -30,6 +39,7 @@
     transition: transform 0.2s ease;
 }
 
+
 .entry-card:hover {
     transform: scale(1.02);
 }
@@ -39,12 +49,26 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 0.5rem;
+    
 }
 
 .author-name {
     font-size: 1.2rem;
     font-weight: bold;
     color: black;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    cursor: pointer;
+}
+
+.entry-card:not(:first-child) .author-name {
+    display: none;
+}
+
+
+.author-name:hover {
+    text-decoration: underline;
 }
 
 .entry-date {
@@ -68,9 +92,10 @@
 }
 
 .sortedContainer {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    width: fit-content;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 5rem;
+    margin-left: 3rem;
+    gap: 1rem;
 }
+

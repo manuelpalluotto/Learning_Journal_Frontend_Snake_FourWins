@@ -109,6 +109,7 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
         return users.find(user => user.username === decoded.username);
     };
 
+    
     function decodeToken(token: string): { username: string } | null {
         try {
             console.log(atob(token.split('.')[1]));
