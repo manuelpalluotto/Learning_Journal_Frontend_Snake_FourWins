@@ -1,11 +1,9 @@
 .body-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     position: absolute;
-    top: 10rem;
-    left: 30rem;
-    margin: 0 auto;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: var(--youtubeBackGray);
     box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.5);
 }
 

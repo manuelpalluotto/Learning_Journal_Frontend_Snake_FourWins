@@ -13,11 +13,9 @@ export default function SnakePage() {
 
   return (
     <>
-      <ProtectedRoute>
         <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
         <Sidenav isOpen={isSidenavOpen} />
         <Snake />
-      </ProtectedRoute>
     </>
   );
 }

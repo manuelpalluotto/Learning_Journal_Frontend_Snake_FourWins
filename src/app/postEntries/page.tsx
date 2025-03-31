@@ -16,11 +16,9 @@ export default function PostEntries() {
 
     return (
         <>
-            <ProtectedRoute>
                 <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
                 <Sidenav isOpen={isSidenavOpen} />
                 <SetEntries />
-            </ProtectedRoute>
         </>
     );
 }
