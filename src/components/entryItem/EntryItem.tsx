@@ -8,23 +8,21 @@ export const EntryItem = ({
     entry,
     isExpanded,
     onToggleExpand,
+    onEntryUpdated,
 }: {
     entry: JournalEntry;
     isExpanded: boolean;
     onToggleExpand: () => void;
+    onEntryUpdated: () => void;
 }) => {
+
+
 
     const { getCurrentUser } = useUser();
     const currentUser = getCurrentUser();
 
     const [updatedEntry, setUpdatedEntry] = useState<string>(entry.entry);
     const [editing, setEditing] = useState<boolean>(false);
-
-
-    const reloadPage = () => {
-        window.location.href = window.location.href;
-    };
-
 
     const sendEdit = async () => {
         const newEntry: JournalEntry = {
@@ -38,8 +36,7 @@ export const EntryItem = ({
         try {
             await editEntry(newEntry);
             setEditing(false);
-            console.log(entry.id, entry.author, updatedEntry, timestamp, entry.userId);
-            reloadPage();
+            onEntryUpdated();
         } catch (error) {
             console.error(error);
         }
@@ -84,21 +81,25 @@ export const EntryItem = ({
                         onClick={(event) => {
                             event.stopPropagation();
                             setEditing(!editing);
+                            sendEdit();
                         }}
                     >
-                        Bearbeiten
+                        Bestätigen
                     </button>
                 </div>
             ) : (
                 <p className={styles['entry-content']}>{entry.entry}</p>
             )}
             <p className={styles['entry-timestamp']}>{formattedTimestamp}</p>
+
+            {currentUser?.id === entry.userId &&
             <button
                 className={styles['edit-button']}
                 onClick={() => setEditing(!editing)}
             >
                 Bearbeiten
             </button>
+            }
         </article>
     );
 };

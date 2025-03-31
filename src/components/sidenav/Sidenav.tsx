@@ -10,10 +10,11 @@ import { useState } from 'react';
 
 export default function Sidenav({ isOpen }: { isOpen: boolean }) {
 
-    
+
 
     return (
-        <div onClick={() => }>
+
+
             <aside className={`${styles['sidenav-container']} ${isOpen ? styles.open : ''}`}>
                 <Link href='/'><FaHome /> Home</Link>
                 <Link href='/snake'><VscSnake /> Snake</Link>
@@ -21,6 +22,7 @@ export default function Sidenav({ isOpen }: { isOpen: boolean }) {
                 <Link href='/getEntries' className={styles['nav-button']}>Einträge anzeigen</Link>
                 <Link href='/postEntries' className={styles['nav-button']}>Eintrag erstellen</Link>
             </aside>
-        </div>
+
+
     );
 } 

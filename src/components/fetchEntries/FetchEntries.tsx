@@ -23,6 +23,10 @@ export default function FetchEntries() {
         }));
     };
 
+    const handleEntryUpdated = () => {
+        getData();
+    };
+
     const getData = async () => {
         try {
             const entryResponse = await fetchEntries();
@@ -61,6 +65,7 @@ export default function FetchEntries() {
                                         entry={entry} 
                                         isExpanded={expandedStates[user.id]}
                                         onToggleExpand={() => toggleExpanded(user.id)}
+                                        onEntryUpdated={handleEntryUpdated}
                                         />
                                     ))
                             )}
