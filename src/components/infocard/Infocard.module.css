@@ -98,6 +98,7 @@
   }
   
   .project {
+    color: var(--ytBackground);
     background-color: var(--youtubeFont);
     border-radius: 8px;
     padding: 1.5rem 2rem;
@@ -137,6 +138,8 @@
   .projectDescription {
     margin-bottom: 1.5rem;
     font-size: 1.05rem;
+    color: var(--ytBackground);
+    font-weight: 400;
   }
   
   .featuresTitle, .techTitle {
