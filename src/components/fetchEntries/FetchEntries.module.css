@@ -1,101 +1,80 @@
-.entries-container {
+/* Container für die gesamte Komponente */
+.container {
     margin: auto;
-    height: 200px;
-    max-width: 600px;
-    background: white;
-    padding: 1.5rem;
-    border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    transition: height 0.3s ease;
-}
-
-.entries-container.expanded {
-    height: 800px; 
-    overflow-y: auto;
-}
-
-.loading-message,
-.error-message,
-.no-entries {
-    text-align: center;
-    font-weight: bold;
-    padding: 1rem;
-}
-
-.error-message {
-    color: red;
-}
-
-.no-entries {
-    color: gray;
-}
-
-.entry-card {
-    border-bottom: 1px solid #ccc;
+    max-width: 800px;
     padding: 2rem;
-    transition: transform 0.2s ease;
+    background: linear-gradient(to bottom right, #00008b, #4b0082); /* Dunkelblau zu Dunkelviolett */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Tiefer Schatten */
+    color: white;
 }
 
-
-.entry-card:hover {
-    transform: scale(1.02);
+/* Titel der Seite */
+.title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: white;
 }
 
-.entry-header {
+/* Filter-Dropdown */
+.filterContainer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.5rem;
-    
+    margin-bottom: 1rem;
 }
 
-.author-name {
-    font-size: 1.2rem;
+.filterLabel {
+    color: white;
     font-weight: bold;
+    margin-right: 1rem;
+}
+
+.filterDropdown {
+    padding: 0.5rem;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+    background: white;
     color: black;
-    display: flex;
-    justify-content: center;
-    width: 100%;
     cursor: pointer;
 }
 
-.entry-card:not(:first-child) .author-name {
-    display: none;
+/* Tabelle für die Einträge */
+.entriesTable {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
 }
 
-
-.author-name:hover {
-    text-decoration: underline;
-}
-
-.entry-date {
-    font-size: 0.9rem;
+.entriesTable th,
+.entriesTable td {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
     color: black;
 }
 
-.entry-content {
-    font-size: 1rem;
-    line-height: 1.5;
-    color: black;
+.entriesTable th {
+    background: #f4f4f4;
+    font-weight: bold;
+    text-transform: uppercase;
 }
 
-.entry-timestamp {
-    font-size: 0.8rem;
-    margin-top: 20px;
-} 
-
-.entry-card:last-child {
-    border-bottom: none;
+.entriesTable tr:hover {
+    background: #f9f9f9;
 }
 
-.sortedContainer {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    margin-top: 5rem;
-    margin-left: 3rem;
-    gap: 1rem;
+/* Nachrichten für Lade- oder leere Zustände */
+.loadingMessage,
+.noEntriesMessage {
+    text-align: center;
+    font-weight: bold;
+    padding: 1rem;
+    color: gray;
 }
-

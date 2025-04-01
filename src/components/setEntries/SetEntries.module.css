@@ -4,7 +4,7 @@
 
 .form-container {
     margin: 10rem auto;
-    background: white;
+    background: transparent;
     padding: 2rem;
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
@@ -16,6 +16,7 @@
 .fieldset {
     border: none;
     padding: 0;
+    background: transparent;
 }
 
 .legend {
@@ -37,8 +38,9 @@
     border: 1px solid #ccc;
     border-radius: 6px;
     font-size: 1rem;
-    color: var(--ytBackground);
+    color: var(--youtubeFont);
     transition: border 0.3s ease;
+    background: transparent;
 }
 
 .input:focus, .textarea:focus {

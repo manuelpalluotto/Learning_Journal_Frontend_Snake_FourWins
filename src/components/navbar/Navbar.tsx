@@ -18,11 +18,8 @@ export default function Navbar({ toggleSidenav }: { toggleSidenav: () => void })
                     <span>Manu Solutions</span>
                 </div>
             </div>
-            <div className={styles['options--button-container']}>
-
-            </div>
             <div className={styles['login-area']}>
-                {isLoggedIn ? (<Link href='/logout' className={styles['navbar--login-button']}>Logout</Link>) : (<Link href='/login' className={styles['login-button']}>Login</Link>)}
+                {isLoggedIn ? (<Link href='/logout' className={styles['navbar--login-button']}>Logout</Link>) : (<Link href='/login' className={styles['navbar--login-button']}>Login</Link>)}
             </div>
         </nav>
     );

@@ -16,6 +16,12 @@ export default function PostEntries() {
 
     return (
         <>
+        <style jsx global>{`
+                body {
+                    background: linear-gradient(to bottom right, #00008b, #4b0082);
+                    color: white;
+                }
+            `}</style>
                 <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
                 <Sidenav isOpen={isSidenavOpen} />
                 <SetEntries />

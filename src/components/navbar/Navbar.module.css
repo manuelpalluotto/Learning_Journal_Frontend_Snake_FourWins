@@ -1,14 +1,10 @@
 .titlebar {
-    position: fixed;
-    top: 0;
-    left: 0;
     width: 100%;
     color: white;
     padding: 1rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    z-index: 1000;
 }
 
 .wrapper-container__titlebar {
@@ -25,7 +21,7 @@
 
 .burger-icon {
     font-size: 2rem;
-    color: black;
+    color: var(--youtubeFont);
 }
 
 .site-icon {
@@ -34,19 +30,10 @@
     gap: 0.5rem;
     font-size: 1.5rem;
     font-weight: 800;
-    color: black;
+    color: var(--youtubeFont);
 }
 
-.options--button-container {
-    display: flex;
-    gap: 1rem;
-    margin: 0 auto;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-.nav-button, .navbar--login-button {
+.navbar--login-button {
     background: white;
     color: black;
     padding: 0.5rem 1rem;
@@ -56,7 +43,11 @@
     transition: 0.3s;
 }
 
-.nav-button:hover, .navbar--login-button:hover {
+.navbar--login-button:hover {
     background: #ff5555;
-    color: white;
+    color: var(--youtubeFont);
+}
+
+.login-area {
+    margin-right: 1rem;
 }

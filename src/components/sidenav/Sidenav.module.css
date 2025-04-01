@@ -2,8 +2,8 @@
 .sidenav-container {
     position: fixed;
     top: 0;
-    left: -250px; 
-    width: 250px;
+    left: -300px; 
+    width: 300px;
     height: 100vh;
     background: rgba(0, 0, 0, 0.8);
     color: white;
@@ -16,7 +16,7 @@
 }
 
 .sidenav-container.open {
-    left: 0; /* Kommt ins Bild */
+    left: 0;
 }
 
 .sidenav-container a {
