@@ -14,7 +14,7 @@ export default function SnakePage() {
   return (
     <>
         <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
-        <Sidenav isOpen={isSidenavOpen} />
+        <Sidenav isOpen={isSidenavOpen} onClose={() => setIsSidenavOpen(false)} />
         <Snake />
     </>
   );

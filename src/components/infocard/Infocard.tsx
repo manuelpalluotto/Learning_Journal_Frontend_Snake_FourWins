@@ -12,6 +12,8 @@ import styles from "./Infocard.module.css";
 import { FaTimeline } from "react-icons/fa6";
 import { GiTicTacToe } from "react-icons/gi";
 import { BiLogoSpringBoot } from "react-icons/bi";
+import { FaChessBoard } from "react-icons/fa";
+
 
 import Link from "next/link";
 import { FaReact } from "react-icons/fa";
@@ -22,30 +24,26 @@ export default function Portfolio() {
     const router = useRouter();
     const [isSidenavOpen, setIsSidenavOpen] = useState<boolean>(false);
 
- /*
- fonts
- blau mittig
- blau trenner?
- sidenav anpassen
- navbar anpassen
- */
-
-
     return (
         <>
             <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
-            <Sidenav isOpen={isSidenavOpen} />
+            <Sidenav isOpen={isSidenavOpen} onClose={() =>setIsSidenavOpen(false)}/>
             <div className={styles.portfolioContainer}>
                 <header className={styles.portfolioHeader}>
                     <h1 className={styles.portfolioName}>Manuel Palluotto - Developer Portfolio</h1>
                 </header>
 
                 <section className={styles.aboutSection}>
-                    <h2 className={styles.sectionTitle}>About Me</h2>
+                    <h2 className={styles.sectionTitle}>About</h2>
                     <p className={styles.aboutText}>
                         Willkommen auf meinem Portfolio! Ich bin ein angehender Softwareentwickler mit einem starken Fokus auf
                         Full-Stack-Entwicklung. Hier finden Sie eine Übersicht über die Projekte, die ich bereits realisieren konnte und außerdem
                         das Wissen, das ich mir dadurch aneignen konnte.
+                        <br/>
+                        <br/>
+                        Außerdem können Sie gerne in der Navigationsleiste auf das Burger-Menü klicken, um die Seitenleiste zu öffnen und sich meine Projekte
+                        <br/>
+                        direkt anzusehen!
                     </p>
                 </section>
 
@@ -184,13 +182,14 @@ export default function Portfolio() {
                             </div>
                         </div>
                         <h3 className={styles.projectTitle}>4. Learning Journal (Frontend)</h3>
-                        <p className={styles.projectDescription}>
+                        <div className={styles.projectDescription}>
                             Das Gegenstück zum Eintrag darüber, somit das Frontend für die Anwendung zum Erstellen und Abrufen <br />
-                            von Einträgen.
-                            <br/><br/>
-                            Da die letzten drei Projekte mit React/Next.js entwickelt wurden und diese Frameworks hauptsächlich für 
-                            die Erstellung von Single-Page Applications (SPAs) genutzt werden, sind alle drei Projekte in einem gemeinsamen Repository organisiert.
-                        </p>
+                            von Einträgen.<br/>
+                            <br/>
+                            Um Einträge abrufen und erstellen zu können, müssen Sie allerdings angemeldet sein. Gerne können dazu die Testdaten eingegeben werden:<br/><br/>
+                            <p>Benutzername: TestUser</p>
+                            <p>Benutzername: TestPasswort</p>
+                        </div>
                         <div className={styles.projectFeatures}>
                             <h4 className={styles.featuresTitle}>Zusammenfassung:</h4>
                             <ul className={styles.featuresList}>
@@ -216,43 +215,66 @@ export default function Portfolio() {
                                 </span>
                             </div>
                         </div>
-                        <h3 className={styles.projectTitle}>5. Spam Mail Detector</h3>
+                        <h3 className={styles.projectTitle}>5. Snake</h3>
                         <p className={styles.projectDescription}>
-                            A machine learning model implemented to detect and filter spam emails using natural language processing techniques.
+                            Ein kleines 2D-Spiel zum Kennenlernen der verschiedenen React-Hooks und Typescript. <br/>
+                            <br/>
+                            Der relevante Teil hierfür liegt im Repository unter src/components/snake!
                         </p>
                         <div className={styles.projectFeatures}>
-                            <h4 className={styles.featuresTitle}>Key Features:</h4>
+                            <h4 className={styles.featuresTitle}>Zusammenfassung:</h4>
                             <ul className={styles.featuresList}>
-                                <li className={styles.featureItem}>ML-based spam detection algorithm</li>
-                                <li className={styles.featureItem}>Email content analysis and classification</li>
-                                <li className={styles.featureItem}>Feature extraction from email text</li>
-                                <li className={styles.featureItem}>High accuracy classification model</li>
+                                <li className={styles.featureItem}>Die Schlange bewegt sich mittels Pfeiltasten</li>
+                                <li className={styles.featureItem}>Sobald man den Rand oder der Schlangenkopf den Körper berührt, ist das Spiel vorbei</li>
                             </ul>
                         </div>
                         <div className={styles.projectTech}>
-                            <h4 className={styles.techTitle}>Technologies Used:</h4>
-                            <p className={styles.techText}>Python, Scikit-learn, Natural Language Processing, Pandas</p>
+                            <h4 className={styles.techTitle}>Genutzte Technologien:</h4>
+                            <p className={styles.techText}>React Next.js mit Typescript</p>
                         </div>
                     </div>
+
+                    <div className={styles.project}>
+                        <div style={{ margin: "0.2rem" }}>
+                            <Link href="https://github.com/manuelpalluotto/Learning_Journal_Frontend_Snake_FourWins" target="_blank" rel="noopener noreferrer"><FaChessBoard size={100} color={"#0f0f0f"} /></Link>
+                            <div className={styles.projectLink}>
+                                <span style={{ backgroundColor: "var(--youtubeFont)", color: "var(--ytBackground)", fontSize: "0.8rem" }}>
+                                    GitHub Repository
+                                </span>
+                            </div>
+                        </div>
+                        <h3 className={styles.projectTitle}>6. Vier Gewinnt</h3>
+                        <p className={styles.projectDescription}>
+                            Ein kleines 2D-Spiel zum Vertiefen der verschiedenen React-Hooks und Typescript. <br/>
+                            <br/>
+                            Der relevante Teil hierfür liegt im Repository unter src/components/checkfour!
+                        </p>
+                        <div className={styles.projectFeatures}>
+                            <h4 className={styles.featuresTitle}>Zusammenfassung:</h4>
+                            <ul className={styles.featuresList}>
+                                <li className={styles.featureItem}>Mit A und D oder aber mit der linken und rechten Pfeiltaste kann man die <br/>
+                                Spalte steuern, in die der Stein geworfen werden soll. Mit Leertaste wird der Stein dann geworfen.
+                                </li>
+                            </ul>
+                        </div>
+                        <div className={styles.projectTech}>
+                            <h4 className={styles.techTitle}>Genutzte Technologien:</h4>
+                            <p className={styles.techText}>React Next.js mit Typescript</p>
+                        </div>
+                    </div>
+
                 </section>
 
                 <section className={styles.strengthsSection}>
-                    <h2 className={styles.sectionTitle}>Professional Strengths</h2>
+                    <h2 className={styles.sectionTitle}>Was mich ausmacht</h2>
                     <ul className={styles.strengthsList}>
                         <li className={styles.strengthItem}>
-                            <span className={styles.strengthHighlight}>Full-Stack Development:</span> Demonstrated ability to work on both frontend and backend technologies
-                        </li>
+                            <span className={styles.strengthHighlight}>Begeisterung:</span> Softwareentwicklung ist für mich nicht nur ein Job, sondern eine Leidenschaft</li>
                         <li className={styles.strengthItem}>
-                            <span className={styles.strengthHighlight}>Blockchain Development:</span> Experience with Ethereum, Solidity, and Web3.js for DApp development
-                        </li>
+                            <span className={styles.strengthHighlight}>Motivation:</span> Das Erschaffen von Anwendungen aus dem Nichts, und die Genugtuung nach dem Lösen von hartnäckigen Problemen motivieren mich</li>
                         <li className={styles.strengthItem}>
-                            <span className={styles.strengthHighlight}>API Integration:</span> Strong skills in creating and consuming RESTful APIs
-                        </li>
-                        <li className={styles.strengthItem}>
-                            <span className={styles.strengthHighlight}>Problem Solving:</span> Creative approaches to technical challenges as evidenced in project implementations
-                        </li>
-                        <li className={styles.strengthItem}>
-                            <span className={styles.strengthHighlight}>Continuous Learning:</span> Regular exploration of new technologies and frameworks
+                            <span className={styles.strengthHighlight}>Teamwork:</span> Kommunikation und Teamchemie sind nicht nur wichtig für reibungsloses Teamwork, sondern sorgen dafür, dass<br/>
+                                                                                         Arbeit etwas ist worauf man sich freuen kann
                         </li>
                     </ul>
                 </section>
@@ -268,7 +290,7 @@ export default function Portfolio() {
                         </li>
                         <li className={styles.contactItem}>
                             <span className={styles.contactLabel}>Email:</span>
-                            <span className={styles.contactText}>Contact via GitHub</span>
+                            <span className={styles.contactText}>palluottomanuel@gmail.com</span>
                         </li>
                     </ul>
                 </section>

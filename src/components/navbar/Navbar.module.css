@@ -5,6 +5,8 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1000;
+
 }
 
 .wrapper-container__titlebar {
@@ -22,6 +24,7 @@
 .burger-icon {
     font-size: 2rem;
     color: var(--youtubeFont);
+
 }
 
 .site-icon {

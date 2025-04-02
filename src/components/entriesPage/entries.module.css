@@ -17,7 +17,7 @@
 .header {
     margin-top: 4rem;
     text-align: center;
-    color: var(--ytBackground);
+    color: var(--youtubeFont);
     margin-bottom: 2rem;
     font-weight: bold;
 }
@@ -72,3 +72,12 @@
     font-weight: bold;
     color: var(--youtubeFont);
 }
+
+.h1 {
+    color: var(--youtubeFont);
+}
+
+.entriesTable {
+    overflow-y: auto;
+}
+

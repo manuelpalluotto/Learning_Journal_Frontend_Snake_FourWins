@@ -24,6 +24,16 @@ export default function Login() {
 
 
     return (
+    <>
+    <style jsx global>
+                {`
+                body {
+                    background: linear-gradient(to bottom right, #00008b, #4b0082);
+                    color: white;
+                }
+                    `}
+            </style>
+    
         <main className="login-container">
             <section className="login-card">
                 <h1>Anmelden</h1>
@@ -53,5 +63,6 @@ export default function Login() {
                 </p>
             </section>
         </main>
+        </>
     );
 }

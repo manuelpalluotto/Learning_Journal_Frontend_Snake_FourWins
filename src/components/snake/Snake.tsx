@@ -1,4 +1,5 @@
 'use client';
+import BackButton from '../backButton/Backbutton';
 import styles from './Snake.module.css';
 import { useEffect, useRef, useState } from "react";
 
@@ -162,6 +163,7 @@ export default function Snake() {
 
     return (
         <>
+        <BackButton href='/' />
             <div className={styles['body-container']}>
                 <div className={styles['game-container']}>
                     <div className={styles['score-container']}>

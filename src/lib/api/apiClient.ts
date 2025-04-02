@@ -7,7 +7,7 @@ export interface JournalEntry {
     id: string;
     author: string;
     entry: string;
-    timestamp: string; 
+    timestamp?: string; 
     userId: string;
 }
 

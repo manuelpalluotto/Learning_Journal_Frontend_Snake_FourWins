@@ -5,6 +5,7 @@ import { useUser } from '@/app/context/UserContext';
 import { addEntry } from '@/lib/api/apiMethods';
 import { JournalEntry } from '@/lib/api/apiClient';
 import { useState, useEffect } from 'react';
+import BackButton from '../backButton/Backbutton';
 
 
 export default function SetEntries() {
@@ -29,7 +30,6 @@ export default function SetEntries() {
         const newEntry: Omit<JournalEntry, 'id'> = {
             author,
             entry,
-            timestamp: new Date().toISOString(), 
             userId: currentUser.id, 
             
         };
@@ -46,6 +46,7 @@ export default function SetEntries() {
 
     return (
         <div className={styles.allContainer}>
+            <BackButton href='/entries' />
         <div className={styles['form-container']}>
             <form onSubmit={handleSubmit} className={styles['entry-form']}>
                 <fieldset className={styles.fieldset}>

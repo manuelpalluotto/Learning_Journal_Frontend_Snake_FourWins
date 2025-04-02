@@ -1,6 +1,7 @@
 import styles from './Checkfour.module.css';
 import { useState, useRef, useEffect } from 'react';
 import { FaArrowDown } from "react-icons/fa";
+import BackButton from '../backButton/Backbutton';
 
 export default function Checkfour() {
 
@@ -93,6 +94,7 @@ export default function Checkfour() {
 
     return (
         <>
+        <BackButton href='/' />
             <div className={styles['game-board']}>
 
                 <div className={styles['game-info']}>

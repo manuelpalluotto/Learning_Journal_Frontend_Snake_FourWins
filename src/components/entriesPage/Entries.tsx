@@ -2,16 +2,17 @@ import Link from 'next/link';
 import styles from './entries.module.css';
 import { FaBookReader } from 'react-icons/fa';
 import { TfiWrite } from 'react-icons/tfi';
+import BackButton from '../backButton/Backbutton';
 
 
 export default function Entries() {
     return (
-        <>
+        <div className={styles.quasiBody}>
+            <BackButton href='/' />
             <header className={styles.header}>
                 <h1 className={styles.h1}>Learning Journal</h1>
                 <p className={styles.p}>Hier kannst du Einträge lesen oder selbst neue erstellen. Teile deine Gedanken und Erfahrungen!</p>
             </header>
-
             <div className={styles.entriesContainerWrapper}>
             <Link href='/getEntries'>
                 <div className={styles.read}>
@@ -30,6 +31,6 @@ export default function Entries() {
                 </div>
                 </Link>
             </div>
-        </>
+        </div>
     );
 }

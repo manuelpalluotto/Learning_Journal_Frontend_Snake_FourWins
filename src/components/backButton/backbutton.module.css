@@ -1,0 +1,15 @@
+.backButton {
+    background: white;
+    color: black;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: 0.3s;
+    margin-left: 2rem;
+}
+
+.backButton:hover {
+    background: #ff5555;
+    color: var(--youtubeFont);
+}
