@@ -19,7 +19,7 @@ export default function EntriesPage() {
                 }
             `}</style>
             <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
-            <Sidenav isOpen={isSidenavOpen} />
+            <Sidenav isOpen={isSidenavOpen} onClose={() => setIsSidenavOpen(false)}/>
             <Entries />
         </>
 

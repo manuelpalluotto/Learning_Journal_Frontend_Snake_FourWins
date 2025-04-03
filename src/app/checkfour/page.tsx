@@ -12,7 +12,7 @@ export default function CheckfourPage() {
     return (
         <>
                 <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
-                <Sidenav isOpen={isSidenavOpen} />
+                <Sidenav isOpen={isSidenavOpen} onClose={() => setIsSidenavOpen(false)}/>
                 <Checkfour />
         </>
     );

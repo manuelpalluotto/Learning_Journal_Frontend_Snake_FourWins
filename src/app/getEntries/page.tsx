@@ -15,7 +15,7 @@ export default function GetEntries() {
     return (
         <>
                 <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
-                <Sidenav isOpen={isSidenavOpen} />
+                <Sidenav isOpen={isSidenavOpen} onClose={() => setIsSidenavOpen(false)}/>
                 <FetchEntries />
         </>
     );

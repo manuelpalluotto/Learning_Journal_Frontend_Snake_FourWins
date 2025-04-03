@@ -23,7 +23,7 @@ export default function PostEntries() {
                 }
             `}</style>
                 <Navbar toggleSidenav={() => setIsSidenavOpen(!isSidenavOpen)} />
-                <Sidenav isOpen={isSidenavOpen} />
+                <Sidenav isOpen={isSidenavOpen} onClose={() => setIsSidenavOpen(false)}/>
                 <SetEntries />
         </>
     );
