@@ -7,7 +7,7 @@ import BackButton from '../backButton/Backbutton';
 
 export default function Checkfour() {
 
-    const canvasRef = useRef<HTMLCanvasElement>(document.createElement('canvas'));
+    const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
     const [player, setPlayer] = useState<string>('Player 1');
 
@@ -23,21 +23,57 @@ export default function Checkfour() {
     const canvasWidth: number = cols * tilesize;
     const canvasHeight: number = rows * tilesize;
 
-    function drawBoard() {
-        const context = canvasRef.current?.getContext('2d');
-        if (context) {
-            context.clearRect(0, 0, canvasWidth, canvasHeight);
+    function checkWin(): boolean {
+        const directions = [
+            { r: 0, c: 1 },  // Horizontal
+            { r: 1, c: 0 },  // Vertikal
+            { r: 1, c: 1 },  // Diagonal /
+            { r: 1, c: -1 }, // Diagonal \
+        ];
 
-            context.strokeStyle = '#d7d7d7';
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                const currentPlayer = board[r][c];
+                if (!currentPlayer) continue; // Leere Felder überspringen
 
-            for (let r = 0; r < rows; r++) {
-                for (let c = 0; c < cols; c++) {
-                    context.strokeRect(c * tilesize, r * tilesize, tilesize, tilesize);
+                // Für jede Richtung prüfen
+                for (let dir of directions) {
+                    let count = 0;
 
+                    // Prüfen, ob wir 4 Steine in einer Richtung finden
+                    for (let i = 0; i < 4; i++) {
+                        const nr = r + dir.r * i;
+                        const nc = c + dir.c * i;
+
+                        // Wenn wir außerhalb des Spiels sind oder die Farbe nicht übereinstimmt, abbrechen
+                        if (nr < 0 || nr >= rows || nc < 0 || nc >= cols || board[nr][nc] !== currentPlayer) {
+                            break;
+                        }
+                        count++;
+                    }
+
+                    if (count === 4) {
+                        return true; // Gewinnbedingung erfüllt
+                    }
                 }
             }
         }
+        return false; // Kein Gewinner
     }
+
+    function drawBoard() {
+        const context = canvasRef.current?.getContext('2d');
+        if (!context) return;
+        context.clearRect(0, 0, canvasWidth, canvasHeight);
+        context.strokeStyle = '#d7d7d7';
+
+        for (let r = 0; r < rows; r++) {
+            for (let c = 0; c < cols; c++) {
+                context.strokeRect(c * tilesize, r * tilesize, tilesize, tilesize);
+            }
+        }
+    }
+
 
     function moveLeftAndRight(e: KeyboardEvent) {
         if ((e.key === 'a' || e.key === 'ArrowLeft') && selectedCol > 0) {
@@ -49,26 +85,31 @@ export default function Checkfour() {
 
     function dropStone() {
         const ctx = canvasRef.current?.getContext('2d');
-        if (ctx) {
-            for (let r = rows - 1; r >= 0; r--) {
-                if (!board[r][selectedCol]) {
+        if (!ctx) return;
 
-                    ctx.fillStyle = player === 'Player 1' ? 'red' : 'yellow';
-                    ctx.beginPath();
+        for (let r = rows - 1; r >= 0; r--) {
+            if (!board[r][selectedCol]) {
+                ctx.fillStyle = player === 'Player 1' ? 'red' : 'yellow';
+                ctx.beginPath();
+                const x = (selectedCol + 0.5) * tilesize;
+                const y = (r + 0.5) * tilesize;
+                ctx.arc(x, y, tilesize / 2, 0, Math.PI * 2);
+                ctx.fill();
 
-                    // Calculate the x and y coordinates based on the column and row
-                    const x = (selectedCol + 0.5) * tilesize;
-                    const y = (r + 0.5) * tilesize;
+                const newBoard = [...board];
+                newBoard[r][selectedCol] = player;
+                setBoard(newBoard);
+                setPlayer(prev => prev === 'Player 1' ? 'Player 2' : 'Player 1');
 
-                    ctx.arc(x, y, tilesize / 2, 0, Math.PI * 2);
-                    ctx.fill();
-                    const newBoard = [...board];
-                    newBoard[r][selectedCol] = player;
-                    setBoard(newBoard);
-                    setPlayer(player === 'Player 1' ? 'Player 2' : 'Player 1');
-                    break;
+                // Prüfen, ob der Spieler gewonnen hat
+                if (checkWin()) {
+                    alert(`${player} wins!`);
+                    // Spiel zurücksetzen
+                    setBoard(Array(rows).fill(null).map(() => Array(cols).fill('')));
+                    setPlayer('Player 1');
+                    setSelectedCol(0);
                 }
-
+                break;
             }
         }
     }
