@@ -1,3 +1,5 @@
+'use client';
+
 import styles from './Checkfour.module.css';
 import { useState, useRef, useEffect } from 'react';
 import { FaArrowDown } from "react-icons/fa";
