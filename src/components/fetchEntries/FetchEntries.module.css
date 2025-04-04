@@ -1,15 +1,13 @@
-/* Container für die gesamte Komponente */
 .container {
     margin: auto;
     max-width: 800px;
     padding: 2rem;
-    background: linear-gradient(to bottom right, #00008b, #4b0082); /* Dunkelblau zu Dunkelviolett */
+    background: linear-gradient(to bottom right, #00008b, #4b0082); 
     border-radius: 12px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Tiefer Schatten */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); 
     color: white;
 }
 
-/* Titel der Seite */
 .title {
     text-align: center;
     font-size: 2rem;
@@ -18,7 +16,6 @@
     color: white;
 }
 
-/* Filter-Dropdown */
 .filterContainer {
     display: flex;
     justify-content: space-between;
@@ -42,7 +39,6 @@
     cursor: pointer;
 }
 
-/* Tabelle für die Einträge */
 .entriesTable {
     width: 100%;
     border-collapse: collapse;
@@ -70,7 +66,6 @@
     background: #f9f9f9;
 }
 
-/* Nachrichten für Lade- oder leere Zustände */
 .loadingMessage,
 .noEntriesMessage {
     text-align: center;

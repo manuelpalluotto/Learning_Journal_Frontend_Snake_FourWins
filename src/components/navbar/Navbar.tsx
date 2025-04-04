@@ -5,22 +5,20 @@ import { FaBong } from "react-icons/fa";
 import { TbBurger } from "react-icons/tb";
 import Link from 'next/link';
 import { useUser } from '@/app/context/UserContext';
-import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar({ toggleSidenav }: { toggleSidenav: () => void }) {
     const { isLoggedIn } = useUser();
 
-    const router = useRouter();
-    const [shouldShowLoginButton, setShouldShowLoginButton] = useState<boolean>();
+    const pathname = usePathname() || '';
     
-    useEffect( () => {
-        if (typeof window !== 'undefined') {
-            const hideLoginButtonOnRoutes = ['/login', '/register', '/'];
-            setShouldShowLoginButton(!hideLoginButtonOnRoutes.includes(router.pathname));
-        }
-    }, [router.pathname]);
+    const routesWithoutLoginButton: string[] = ['/', '/snake', '/checkfour'];
+    const [boolean, setBoolean] = useState<boolean>(routesWithoutLoginButton.includes(pathname));
 
+    useEffect(() => {
+        setBoolean(routesWithoutLoginButton.includes(pathname));
+    }, [pathname]);
 
     return (
         <nav className={styles.titlebar}>
@@ -33,9 +31,11 @@ export default function Navbar({ toggleSidenav }: { toggleSidenav: () => void })
                     <span>Manu Solutions</span>
                 </div>
             </div>
-            <div className={styles['login-area']}>
-                {shouldShowLoginButton && isLoggedIn ? (<Link href='/logout' className={styles['navbar--login-button']}>Logout</Link>) : (<Link href='/login' className={styles['navbar--login-button']}>Login</Link>)}
-            </div>
+            { !boolean && 
+                <div className={styles['login-area']}>
+                    {isLoggedIn ? (<Link href='/logout' className={styles['navbar--login-button']}>Logout</Link>) : (<Link href={`/login?redirect=${encodeURIComponent(pathname)}`} className={styles['navbar--login-button']}>Login</Link>)}
+                </div>
+            }
         </nav>
     );
 }
