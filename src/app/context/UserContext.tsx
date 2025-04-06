@@ -100,6 +100,11 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
 };
 
     const getCurrentUser = (): User | undefined => {
+
+        if(typeof window === 'undefined') {
+            return undefined;
+        }
+
         const token = localStorage.getItem('token');
         if (!token) return undefined;
     
