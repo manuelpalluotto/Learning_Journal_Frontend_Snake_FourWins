@@ -20,6 +20,10 @@ export default function Navbar({ toggleSidenav }: { toggleSidenav: () => void })
         setBoolean(routesWithoutLoginButton.includes(pathname));
     }, [pathname]);
 
+    if (typeof window === 'undefined') {
+        return null;
+    }
+
     return (
         <nav className={styles.titlebar}>
             <div className={styles['wrapper-container__titlebar']}>

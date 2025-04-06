@@ -15,6 +15,10 @@ export default function SetEntries() {
     const author: string = currentUser?.username || '';
     const [entry, setEntry] = useState<string>('');
 
+    if (typeof window === 'undefined') {
+        return null;
+    }
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         if (!isLoggedIn) {

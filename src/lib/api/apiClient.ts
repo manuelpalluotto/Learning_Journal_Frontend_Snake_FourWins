@@ -1,7 +1,16 @@
 import axios from 'axios';
 
-const URL = 'http://backend:8080/';
+const URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
+  ? 'http://localhost:8080/'
+  : 'http://learning-journal-backend:8080/';
 
+  
+const apiClient = axios.create({
+    baseURL: URL,
+    headers: { 'Content-Type': 'application/json', },
+    withCredentials: true,
+},
+);
 
 export interface JournalEntry {
     id: string;
@@ -21,12 +30,6 @@ export interface User {
     classroom: string;
 }
 
-const apiClient = axios.create({
-    baseURL: URL,
-    headers: { 'Content-Type': 'application/json', },
-    withCredentials: true,
-},
-);
 
 apiClient.interceptors.response.use(
     response => response, 
