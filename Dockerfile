@@ -1,4 +1,4 @@
-FROM node:18-alpine AS builder
+FROM arm64v8/node:18-alpine
 WORKDIR /app
 COPY . .
 RUN npm install
