@@ -1,0 +1,18 @@
+# node modules und Build-Ordner
+node_modules
+dist
+build
+
+# Git-Ordner
+.git
+
+# System-/Editor-Kram
+.DS_Store
+.vscode
+.idea
+
+# Log-Dateien
+*.log
+
+# Umgebungsvariablen
+.env
