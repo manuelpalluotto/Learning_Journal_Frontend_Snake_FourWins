@@ -41,7 +41,7 @@ export default function Sidenav({ isOpen, onClose }: { isOpen: boolean; onClose:
             <Link href='/'><FaHome /> Home</Link>
             <Link href='/snake'><VscSnake /> Snake</Link>
             <Link href='/checkfour'><FaChessBoard /> Vier Gewinnt</Link>
-            <Link href='/entries'><BsJournal /> Learning Journal</Link>
+            {/* <Link href='/entries'><BsJournal /> Learning Journal</Link> */}
         </aside>
 
 

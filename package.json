@@ -9,7 +9,6 @@
     "start": "next start",
     "lint": "next lint",
     "debug": "NODE_OPTIONS='--inspect' next dev"
-
   },
   "dependencies": {
     "@prisma/client": "^6.4.0",
@@ -17,7 +16,7 @@
     "axios": "^1.8.3",
     "cookies-next": "^5.1.0",
     "mysql2": "^3.14.0",
-    "next": "15.1.7",
+    "next": "^15.1.7",
     "next-auth": "^4.24.11",
     "prisma": "^6.4.0",
     "react": "^19.0.0",

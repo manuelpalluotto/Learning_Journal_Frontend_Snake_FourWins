@@ -1,16 +1,20 @@
-# Build Stage
-FROM arm64v8/node:18-alpine AS builder
-WORKDIR /app
-COPY package*.json ./
-RUN npm install
-COPY . .
-RUN npm run build
+# ---- BASE IMAGE: Alpine, leicht & ARM-kompatibel ----
+    FROM node:20-alpine AS base
 
-# Final Stage
-FROM arm64v8/node:18-alpine
-WORKDIR /app
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/package*.json ./
-RUN npm install --omit=dev
-EXPOSE 3000
-CMD ["npm", "run", "start"]
+    # Set working directory
+    WORKDIR /app
+    
+    # ---- COPY: Nur die nötigen Dateien für die Runtime ----
+    # Wichtig: Keine devDependencies notwendig
+    COPY package.json package-lock.json* ./  
+    COPY .next .next
+    COPY public public
+    COPY tsconfig.json .                     
+    
+    # ---- INSTALL only production deps ----
+    RUN npm ci --omit=dev
+    
+    # ---- START ----
+    EXPOSE 3000
+    CMD ["npm", "start"]
+    

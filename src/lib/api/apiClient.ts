@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const URL = typeof window !== 'undefined' && window.location.hostname === 'localhost'
   ? 'http://localhost:8080/'
-  : 'http://learning-journal-backend:8080/';
+  : 'http://lj-backend:8080/';
 
   
 const apiClient = axios.create({
