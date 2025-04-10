@@ -1,20 +1,25 @@
-# ---- BASE IMAGE: Alpine, leicht & ARM-kompatibel ----
-    FROM node:20-alpine AS base
-
-    # Set working directory
+# ----------- BUILD PHASE -----------
+    FROM node:18-alpine AS builder
     WORKDIR /app
     
-    # ---- COPY: Nur die nötigen Dateien für die Runtime ----
-    # Wichtig: Keine devDependencies notwendig
-    COPY package.json package-lock.json* ./  
-    COPY .next .next
-    COPY public public
-    COPY tsconfig.json .                     
+    COPY package*.json ./
+    RUN npm install
     
-    # ---- INSTALL only production deps ----
-    RUN npm ci --omit=dev
+    COPY . .
+    RUN npm run build
     
-    # ---- START ----
+    # ----------- PRODUCTION PHASE -----------
+    FROM node:18-alpine AS runner
+    WORKDIR /app
+    
+    ENV NODE_ENV=production
+    
+    COPY --from=builder /app/public ./public
+    COPY --from=builder /app/.next ./.next
+    COPY --from=builder /app/node_modules ./node_modules
+    COPY --from=builder /app/package*.json ./
+    
     EXPOSE 3000
+    
     CMD ["npm", "start"]
     

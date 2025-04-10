@@ -185,10 +185,6 @@ export default function Portfolio() {
                         <div className={styles.projectDescription}>
                             Das Gegenstück zum Eintrag darüber, somit das Frontend für die Anwendung zum Erstellen und Abrufen <br />
                             von Einträgen.<br/>
-                            <br/>
-                            Um Einträge abrufen und erstellen zu können, müssen Sie allerdings angemeldet sein. Gerne können dazu die Testdaten eingegeben werden:<br/><br/>
-                            <p>Benutzername: TestUser</p>
-                            <p>Benutzername: TestPasswort</p>
                         </div>
                         <div className={styles.projectFeatures}>
                             <h4 className={styles.featuresTitle}>Zusammenfassung:</h4>
