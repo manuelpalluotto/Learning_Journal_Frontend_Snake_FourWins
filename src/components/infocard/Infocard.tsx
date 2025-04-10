@@ -42,15 +42,14 @@ export default function Portfolio() {
                         <br/>
                         <br/>
                         Außerdem können Sie gerne in der Navigationsleiste auf das Burger-Menü klicken, um die Seitenleiste zu öffnen und sich meine Projekte
-                        <br/>
                         direkt anzusehen!
                     </p>
                 </section>
 
-                <h2 className={styles.sectionTitle}>Technical Skills</h2>
+                <h2 className={styles.sectionTitle}>Technische Fähigkeiten</h2>
                 <section className={styles.skillsSection}>
                     <div className={styles.skillCategory}>
-                        <h3 className={styles.skillCategoryTitle}>Languages</h3>
+                        <h3 className={styles.skillCategoryTitle}>Programmiersprachen</h3>
                         <ul className={styles.skillsList}>
                             <li className={styles.skillItem}>JavaScript / TypeScript</li>
                             <li className={styles.skillItem}>Java / Objektorientierte Programmierung</li>
@@ -60,7 +59,7 @@ export default function Portfolio() {
                     </div>
 
                     <div className={styles.skillCategory}>
-                        <h3 className={styles.skillCategoryTitle}>Frameworks & Libraries</h3>
+                        <h3 className={styles.skillCategoryTitle}>Frameworks & Bibliotheken</h3>
                         <ul className={styles.skillsList}>
                             <li className={styles.skillItem}>Java Spring Boot</li>
                             <li className={styles.skillItem}>Next.js</li>
@@ -69,7 +68,7 @@ export default function Portfolio() {
                     </div>
 
                     <div className={styles.skillCategory}>
-                        <h3 className={styles.skillCategoryTitle}>Tools & Platforms</h3>
+                        <h3 className={styles.skillCategoryTitle}>Tools</h3>
                         <ul className={styles.skillsList}>
                             <li className={styles.skillItem}>Git / GitHub</li>
                             <li className={styles.skillItem}>RESTful APIs</li>
@@ -80,7 +79,7 @@ export default function Portfolio() {
                 </section>
 
                 <section className={styles.projectsSection}>
-                    <h2 className={styles.sectionTitle}>Featured Projects</h2>
+                    <h2 className={styles.sectionTitle}>Meine Projekte</h2>
 
                     <div className={styles.project}>
                         <div style={{ margin: "0.2rem" }}>
@@ -185,10 +184,6 @@ export default function Portfolio() {
                         <div className={styles.projectDescription}>
                             Das Gegenstück zum Eintrag darüber, somit das Frontend für die Anwendung zum Erstellen und Abrufen <br />
                             von Einträgen.<br/>
-                            <br/>
-                            Um Einträge abrufen und erstellen zu können, müssen Sie allerdings angemeldet sein. Gerne können dazu die Testdaten eingegeben werden:<br/><br/>
-                            <p>Benutzername: TestUser</p>
-                            <p>Benutzername: TestPasswort</p>
                         </div>
                         <div className={styles.projectFeatures}>
                             <h4 className={styles.featuresTitle}>Zusammenfassung:</h4>
@@ -280,7 +275,7 @@ export default function Portfolio() {
                 </section>
 
                 <section className={styles.contactSection}>
-                    <h2 className={styles.sectionTitle}>Contact Information</h2>
+                    <h2 className={styles.sectionTitle}>Kontakt</h2>
                     <ul className={styles.contactList}>
                         <li className={styles.contactItem}>
                             <span className={styles.contactLabel}>GitHub:</span>
